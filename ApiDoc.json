@@ -1,0 +1,4290 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Api Call Center",
+        "description": "Daftar Api Call Center",
+        "version": "1.0.0"
+    },
+    "swagger_ui_extra_configuration": {
+        "filter": true,
+        "docExpansion": "none"
+    },
+    "servers": [
+        {
+            "url": "http://192.168.3.98:8008",
+            "description": "Server Staging"
+        },
+        {
+            "url": "http://localhost:8008",
+            "description": "Server Local"
+        }
+    ],
+    "components": {
+        "securitySchemes": {
+            "bearerAuth": {
+                "type": "http",
+                "scheme": "bearer",
+                "bearerFormat": "JWT"
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Token",
+            "description": "Token"
+        },
+        {
+            "name": "Logout",
+            "description": "logout"
+        },
+        {
+            "name": "QueueMembers",
+            "description": "Queue Members"
+        },
+        {
+            "name": "UserActivities",
+            "description": "User Activities"
+        },
+        {
+            "name": "Users",
+            "description": "Users"
+        },
+        {
+            "name": "Calls",
+            "description": "Calls"
+        },
+        {
+            "name": "BreakReasons",
+            "description": "BreakReasons"
+        },
+        {
+            "name": "BreakHistories",
+            "description": "BreakHistories"
+        },
+        {
+            "name": "Extensions",
+            "description": "extensions"
+        },
+        {
+            "name": "Listen",
+            "description": "listen"
+        },
+        {
+            "name": "Whisper",
+            "description": "whisper"
+        },
+        {
+            "name": "Mute",
+            "description": "mute"
+        },
+        {
+            "name": "Transfer",
+            "description": "transfer"
+        },
+        {
+            "name": "Outbound",
+            "description": "Outbound"
+        },
+        {
+            "name": "DTMF",
+            "description": "Play DTMF"
+        },
+        {
+            "name": "Pickup",
+            "description": "pickup"
+        },
+        {
+            "name": "Campaigns",
+            "description": "campaigns"
+        },
+        {
+            "name": "CampaignDetails",
+            "description": "campaign_details"
+        },
+        {
+            "name": "CampaignUsers",
+            "description": "CampaignUsers"
+        },
+        {
+            "name": "CustomerFields",
+            "description": "CustomerFields"
+        },
+        {
+            "name": "Callbacks",
+            "description": "callbacks"
+        },
+        {
+            "name": "Emails",
+            "description": "emails"
+        },
+        {
+            "name": "QualityAssurance",
+            "description": "quality_assurance"
+        },
+        {
+            "name": "QualityAssuranceAspects",
+            "description": "quality_assurance_aspects"
+        },
+        {
+            "name": "QualityAssuranceDetails",
+            "description": "quality_assurance_details"
+        },
+        {
+            "name": "QualityAssuranceUsers",
+            "description": "quality_assurance_users"
+        }
+    ],
+    "paths": {
+        "/users/login": {
+            "post": {
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "username": {
+                                        "type": "string"
+                                    },
+                                    "password": {
+                                        "type": "password"
+                                    }
+                                },
+                                "required": [
+                                    "username",
+                                    "password"
+                                ]
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "Token"
+                ],
+                "summary": "Login Token",
+                "description": "",
+                "responses": {
+                    "200": {
+                        "description": "success"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "404": {
+                        "description": "Not found."
+                    }
+                }
+            }
+        },
+        "/logout": {
+            "post": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "Logout"
+                ],
+                "summary": "Logout",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "extension": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "description": "",
+                "responses": {
+                    "200": {
+                        "description": "success"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "404": {
+                        "description": "Not found."
+                    }
+                }
+            }
+        },
+        "/queue_members": {
+            "get": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "QueueMembers"
+                ],
+                "summary": "Get All QueueMembers",
+                "description": "",
+                "responses": {
+                    "200": {
+                        "description": "success"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "404": {
+                        "description": "Not found."
+                    }
+                }
+            },
+            "post": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "QueueMembers"
+                ],
+                "summary": "Insert Data QueueMembers",
+                "description": "",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "queue": {
+                                        "type": "string"
+                                    },
+                                    "extension": {
+                                        "type": "string"
+                                    },
+                                    "is_paused": {
+                                        "type": "integer"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "success"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "404": {
+                        "description": "Not found."
+                    }
+                }
+            }
+        },
+        "/queue_members/{id}": {
+            "get": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "QueueMembers"
+                ],
+                "summary": "Get By Id QueueMembers",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "type": "integer",
+                        "required": true,
+                        "description": "Numeric ID of the QueueMembers to get."
+                    }
+                ],
+                "description": "",
+                "responses": {
+                    "200": {
+                        "description": "success"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "404": {
+                        "description": "Not found."
+                    }
+                }
+            },
+            "put": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "QueueMembers"
+                ],
+                "summary": "Update By Id QueueMembers",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "type": "integer",
+                        "required": true,
+                        "description": "Numeric ID of the QueueMembers to get."
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "queue": {
+                                        "type": "string"
+                                    },
+                                    "extension": {
+                                        "type": "string"
+                                    },
+                                    "is_paused": {
+                                        "type": "integer"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "description": "",
+                "responses": {
+                    "200": {
+                        "description": "success"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "404": {
+                        "description": "Not found."
+                    }
+                }
+            }
+        },
+        "/user_activities": {
+            "get": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "UserActivities"
+                ],
+                "summary": "Get All UserActivities",
+                "description": "",
+                "responses": {
+                    "200": {
+                        "description": "success"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "404": {
+                        "description": "Not found."
+                    }
+                }
+            },
+            "post": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "UserActivities"
+                ],
+                "summary": "Insert Data UserActivities",
+                "description": "",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "sort": {
+                                        "type": "integer"
+                                    },
+                                    "code": {
+                                        "type": "string"
+                                    },
+                                    "name": {
+                                        "type": "string"
+                                    },
+                                    "info": {
+                                        "type": "string"
+                                    },
+                                    "is_default": {
+                                        "type": "integer"
+                                    },
+                                    "is_active": {
+                                        "type": "integer"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "success"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "404": {
+                        "description": "Not found."
+                    }
+                }
+            }
+        },
+        "/user_activities/{id}": {
+            "get": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "UserActivities"
+                ],
+                "summary": "Get By Id UserActivities",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "type": "integer",
+                        "required": true,
+                        "description": "Numeric ID of the QueueMembers to get."
+                    }
+                ],
+                "description": "",
+                "responses": {
+                    "200": {
+                        "description": "success"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "404": {
+                        "description": "Not found."
+                    }
+                }
+            },
+            "put": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "UserActivities"
+                ],
+                "summary": "Update By Id UserActivities",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "type": "integer",
+                        "required": true,
+                        "description": "Numeric ID of the UserActivities to get."
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "sort": {
+                                        "type": "integer"
+                                    },
+                                    "code": {
+                                        "type": "string"
+                                    },
+                                    "name": {
+                                        "type": "string"
+                                    },
+                                    "info": {
+                                        "type": "string"
+                                    },
+                                    "is_default": {
+                                        "type": "integer"
+                                    },
+                                    "is_active": {
+                                        "type": "integer"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "description": "",
+                "responses": {
+                    "200": {
+                        "description": "success"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "404": {
+                        "description": "Not found."
+                    }
+                }
+            }
+        },
+        "/users": {
+            "get": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Get All Users",
+                "description": "",
+                "responses": {
+                    "200": {
+                        "description": "success"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "404": {
+                        "description": "Not found."
+                    }
+                }
+            },
+            "post": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Insert Data Users",
+                "description": "",
+                "requestBody": {
+                    "content": {
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "type": "object",
+                                "required": [
+                                    "username",
+                                    "password",
+                                    "user_level_id",
+                                    "department_id",
+                                    "fullname"
+                                ],
+                                "properties": {
+                                    "username": {
+                                        "type": "string"
+                                    },
+                                    "password": {
+                                        "type": "string"
+                                    },
+                                    "user_level_id": {
+                                        "type": "integer"
+                                    },
+                                    "department_id": {
+                                        "type": "integer"
+                                    },
+                                    "user_activity_id": {
+                                        "type": "integer"
+                                    },
+                                    "fullname": {
+                                        "type": "string"
+                                    },
+                                    "firstname": {
+                                        "type": "string"
+                                    },
+                                    "middlename": {
+                                        "type": "string"
+                                    },
+                                    "lastname": {
+                                        "type": "string"
+                                    },
+                                    "email": {
+                                        "type": "string"
+                                    },
+                                    "mobile": {
+                                        "type": "string"
+                                    },
+                                    "phone": {
+                                        "type": "string"
+                                    },
+                                    "address": {
+                                        "type": "string"
+                                    },
+                                    "picture": {
+                                        "type": "string"
+                                    },
+                                    "gender_id": {
+                                        "type": "integer"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "success"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "404": {
+                        "description": "Not found."
+                    }
+                }
+            }
+        },
+        "/users/{id}": {
+            "get": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Get By Id Users",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "type": "integer",
+                        "required": true,
+                        "description": "Numeric ID of the Users to get."
+                    }
+                ],
+                "description": "",
+                "responses": {
+                    "200": {
+                        "description": "success"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "404": {
+                        "description": "Not found."
+                    }
+                }
+            },
+            "put": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Update By Id Users",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "type": "integer",
+                        "required": true,
+                        "description": "Numeric ID of the Users to get."
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "username": {
+                                        "type": "string"
+                                    },
+                                    "password": {
+                                        "type": "string"
+                                    },
+                                    "user_level_id": {
+                                        "type": "integer"
+                                    },
+                                    "department_id": {
+                                        "type": "integer"
+                                    },
+                                    "user_activity_id": {
+                                        "type": "integer"
+                                    },
+                                    "fullname": {
+                                        "type": "string"
+                                    },
+                                    "firstname": {
+                                        "type": "string"
+                                    },
+                                    "middlename": {
+                                        "type": "string"
+                                    },
+                                    "lastname": {
+                                        "type": "string"
+                                    },
+                                    "email": {
+                                        "type": "string"
+                                    },
+                                    "mobile": {
+                                        "type": "string"
+                                    },
+                                    "phone": {
+                                        "type": "string"
+                                    },
+                                    "address": {
+                                        "type": "string"
+                                    },
+                                    "picture": {
+                                        "type": "string"
+                                    },
+                                    "gender_id": {
+                                        "type": "integer"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "description": "",
+                "responses": {
+                    "200": {
+                        "description": "success"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "404": {
+                        "description": "Not found."
+                    }
+                }
+            }
+        },
+        "/users/online": {
+            "get": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Get Online Users",
+                "description": "",
+                "responses": {
+                    "200": {
+                        "description": "success"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "404": {
+                        "description": "Not found."
+                    }
+                }
+            }
+        },
+        "/users/activity/{ext}": {
+            "put": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Update Activity Users",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "ext",
+                        "type": "integer",
+                        "required": true,
+                        "description": "Numeric ext."
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "user_activity_id": {
+                                        "type": "integer"
+                                    }
+                                },
+                                "required": [
+                                    "user_activity_id"
+                                ]
+                            }
+                        }
+                    }
+                },
+                "description": "",
+                "responses": {
+                    "200": {
+                        "description": "success"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "404": {
+                        "description": "Not found."
+                    }
+                }
+            }
+        },
+        "/calls": {
+            "get": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "Calls"
+                ],
+                "summary": "Get All Calls",
+                "description": "",
+                "responses": {
+                    "200": {
+                        "description": "success"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "404": {
+                        "description": "Not found."
+                    }
+                }
+            },
+            "post": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "Calls"
+                ],
+                "summary": "Insert Data Calls",
+                "description": "",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "ref_call_id": {
+                                        "type": "integer"
+                                    },
+                                    "direction_id": {
+                                        "type": ""
+                                    },
+                                    "channel": {
+                                        "type": "string"
+                                    },
+                                    "unique_id": {
+                                        "type": "string"
+                                    },
+                                    "dnid": {
+                                        "type": "string"
+                                    },
+                                    "extension": {
+                                        "type": "string"
+                                    },
+                                    "phone_number": {
+                                        "type": "string"
+                                    },
+                                    "call_state_id": {
+                                        "type": "integer"
+                                    },
+                                    "media_status_id": {
+                                        "type": "integer"
+                                    },
+                                    "media_status_detail_id": {
+                                        "type": "integer"
+                                    },
+                                    "media_status_detail_sub_id": {
+                                        "type": "integer"
+                                    },
+                                    "call_date": {
+                                        "type": "date"
+                                    },
+                                    "ivr_date": {
+                                        "type": "date"
+                                    },
+                                    "queue_date": {
+                                        "type": "date"
+                                    },
+                                    "leave_date": {
+                                        "type": "date"
+                                    },
+                                    "transfer_date": {
+                                        "type": "date"
+                                    },
+                                    "ringing_date": {
+                                        "type": "date"
+                                    },
+                                    "bridge_date": {
+                                        "type": "date"
+                                    },
+                                    "pickup_date": {
+                                        "type": "date"
+                                    },
+                                    "disconected_date": {
+                                        "type": "date"
+                                    },
+                                    "hangup_date": {
+                                        "type": "date"
+                                    },
+                                    "dropcall_date": {
+                                        "type": "date"
+                                    },
+                                    "speed_answer": {
+                                        "type": "string"
+                                    },
+                                    "talk_duration": {
+                                        "type": "string"
+                                    },
+                                    "call_duration": {
+                                        "type": "string"
+                                    },
+                                    "acw_duration": {
+                                        "type": "string"
+                                    },
+                                    "hold_duration": {
+                                        "type": "string"
+                                    },
+                                    "mute_duration": {
+                                        "type": "string"
+                                    },
+                                    "voicemail_date": {
+                                        "type": "date"
+                                    },
+                                    "vmail_start_date": {
+                                        "type": "date"
+                                    },
+                                    "vmail_finish_date": {
+                                        "type": "date"
+                                    },
+                                    "host_address": {
+                                        "type": "string"
+                                    },
+                                    "filename": {
+                                        "type": "string"
+                                    },
+                                    "pbx_filename": {
+                                        "type": "string"
+                                    },
+                                    "upload_date": {
+                                        "type": "date"
+                                    },
+                                    "path": {
+                                        "type": "string"
+                                    },
+                                    "contact_type_id": {
+                                        "type": "integer"
+                                    },
+                                    "contact_name": {
+                                        "type": "string"
+                                    },
+                                    "register_phone": {
+                                        "type": "string"
+                                    },
+                                    "note": {
+                                        "type": "string"
+                                    },
+                                    "user_id": {
+                                        "type": "integer"
+                                    },
+                                    "user_login": {
+                                        "type": "integer"
+                                    },
+                                    "user_not_available": {
+                                        "type": "integer"
+                                    },
+                                    "user_ready_in": {
+                                        "type": "integer"
+                                    },
+                                    "user_online_in": {
+                                        "type": "integer"
+                                    },
+                                    "user_ready_out": {
+                                        "type": "integer"
+                                    },
+                                    "user_online_out": {
+                                        "type": "integer"
+                                    },
+                                    "user_ready_sms_in": {
+                                        "type": "integer"
+                                    },
+                                    "user_ready_sms_out": {
+                                        "type": "integer"
+                                    },
+                                    "user_inbound_email": {
+                                        "type": "integer"
+                                    },
+                                    "user_outbound_email": {
+                                        "type": "integer"
+                                    },
+                                    "user_voicemail": {
+                                        "type": "integer"
+                                    },
+                                    "user_inbound_chat": {
+                                        "type": "integer"
+                                    },
+                                    "user_paperwork": {
+                                        "type": "integer"
+                                    },
+                                    "user_break": {
+                                        "type": "integer"
+                                    },
+                                    "user_busy": {
+                                        "type": "integer"
+                                    },
+                                    "user_ringing": {
+                                        "type": "integer"
+                                    },
+                                    "created_at": {
+                                        "type": "date"
+                                    },
+                                    "created_by": {
+                                        "type": "integer"
+                                    },
+                                    "updated_at": {
+                                        "type": "date"
+                                    },
+                                    "updated_by": {
+                                        "type": "integer"
+                                    },
+                                    "read_at": {
+                                        "type": "date"
+                                    },
+                                    "read_by": {
+                                        "type": "integer"
+                                    },
+                                    "is_blocking": {
+                                        "type": "integer"
+                                    },
+                                    "is_call_status_detail": {
+                                        "type": "integer"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "success"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "404": {
+                        "description": "Not found."
+                    }
+                }
+            }
+        },
+        "/calls/{id}": {
+            "get": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "Calls"
+                ],
+                "summary": "Get By Id Calls",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "type": "integer",
+                        "required": true,
+                        "description": "Numeric ID of the Calls to get."
+                    }
+                ],
+                "description": "",
+                "responses": {
+                    "200": {
+                        "description": "success"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "404": {
+                        "description": "Not found."
+                    }
+                }
+            },
+            "put": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "Calls"
+                ],
+                "summary": "Update By Id Calls",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "type": "integer",
+                        "required": true,
+                        "description": "Numeric ID of the Calls to get."
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "ref_call_id": {
+                                        "type": "integer"
+                                    },
+                                    "direction_id": {
+                                        "type": ""
+                                    },
+                                    "channel": {
+                                        "type": "string"
+                                    },
+                                    "unique_id": {
+                                        "type": "string"
+                                    },
+                                    "dnid": {
+                                        "type": "string"
+                                    },
+                                    "extension": {
+                                        "type": "string"
+                                    },
+                                    "phone_number": {
+                                        "type": "string"
+                                    },
+                                    "call_state_id": {
+                                        "type": "integer"
+                                    },
+                                    "media_status_id": {
+                                        "type": "integer"
+                                    },
+                                    "media_status_detail_id": {
+                                        "type": "integer"
+                                    },
+                                    "media_status_detail_sub_id": {
+                                        "type": "integer"
+                                    },
+                                    "call_date": {
+                                        "type": "date"
+                                    },
+                                    "ivr_date": {
+                                        "type": "date"
+                                    },
+                                    "queue_date": {
+                                        "type": "date"
+                                    },
+                                    "leave_date": {
+                                        "type": "date"
+                                    },
+                                    "transfer_date": {
+                                        "type": "date"
+                                    },
+                                    "ringing_date": {
+                                        "type": "date"
+                                    },
+                                    "bridge_date": {
+                                        "type": "date"
+                                    },
+                                    "pickup_date": {
+                                        "type": "date"
+                                    },
+                                    "disconected_date": {
+                                        "type": "date"
+                                    },
+                                    "hangup_date": {
+                                        "type": "date"
+                                    },
+                                    "dropcall_date": {
+                                        "type": "date"
+                                    },
+                                    "speed_answer": {
+                                        "type": "string"
+                                    },
+                                    "talk_duration": {
+                                        "type": "string"
+                                    },
+                                    "call_duration": {
+                                        "type": "string"
+                                    },
+                                    "acw_duration": {
+                                        "type": "string"
+                                    },
+                                    "hold_duration": {
+                                        "type": "string"
+                                    },
+                                    "mute_duration": {
+                                        "type": "string"
+                                    },
+                                    "voicemail_date": {
+                                        "type": "date"
+                                    },
+                                    "vmail_start_date": {
+                                        "type": "date"
+                                    },
+                                    "vmail_finish_date": {
+                                        "type": "date"
+                                    },
+                                    "host_address": {
+                                        "type": "string"
+                                    },
+                                    "filename": {
+                                        "type": "string"
+                                    },
+                                    "pbx_filename": {
+                                        "type": "string"
+                                    },
+                                    "upload_date": {
+                                        "type": "date"
+                                    },
+                                    "path": {
+                                        "type": "string"
+                                    },
+                                    "contact_type_id": {
+                                        "type": "integer"
+                                    },
+                                    "contact_name": {
+                                        "type": "string"
+                                    },
+                                    "register_phone": {
+                                        "type": "string"
+                                    },
+                                    "note": {
+                                        "type": "string"
+                                    },
+                                    "user_id": {
+                                        "type": "integer"
+                                    },
+                                    "user_login": {
+                                        "type": "integer"
+                                    },
+                                    "user_not_available": {
+                                        "type": "integer"
+                                    },
+                                    "user_ready_in": {
+                                        "type": "integer"
+                                    },
+                                    "user_online_in": {
+                                        "type": "integer"
+                                    },
+                                    "user_ready_out": {
+                                        "type": "integer"
+                                    },
+                                    "user_online_out": {
+                                        "type": "integer"
+                                    },
+                                    "user_ready_sms_in": {
+                                        "type": "integer"
+                                    },
+                                    "user_ready_sms_out": {
+                                        "type": "integer"
+                                    },
+                                    "user_inbound_email": {
+                                        "type": "integer"
+                                    },
+                                    "user_outbound_email": {
+                                        "type": "integer"
+                                    },
+                                    "user_voicemail": {
+                                        "type": "integer"
+                                    },
+                                    "user_inbound_chat": {
+                                        "type": "integer"
+                                    },
+                                    "user_paperwork": {
+                                        "type": "integer"
+                                    },
+                                    "user_break": {
+                                        "type": "integer"
+                                    },
+                                    "user_busy": {
+                                        "type": "integer"
+                                    },
+                                    "user_ringing": {
+                                        "type": "integer"
+                                    },
+                                    "created_at": {
+                                        "type": "date"
+                                    },
+                                    "created_by": {
+                                        "type": "integer"
+                                    },
+                                    "updated_at": {
+                                        "type": "date"
+                                    },
+                                    "updated_by": {
+                                        "type": "integer"
+                                    },
+                                    "read_at": {
+                                        "type": "date"
+                                    },
+                                    "read_by": {
+                                        "type": "integer"
+                                    },
+                                    "is_blocking": {
+                                        "type": "integer"
+                                    },
+                                    "is_call_status_detail": {
+                                        "type": "integer"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "description": "",
+                "responses": {
+                    "200": {
+                        "description": "success"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "404": {
+                        "description": "Not found."
+                    }
+                }
+            }
+        },
+        "/break_reasons": {
+            "get": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "BreakReasons"
+                ],
+                "summary": "Get All BreakReasons",
+                "description": "",
+                "responses": {
+                    "200": {
+                        "description": "success"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "404": {
+                        "description": "Not found."
+                    }
+                }
+            },
+            "post": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "BreakReasons"
+                ],
+                "summary": "Insert Data BreakReasons",
+                "description": "",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "sort": {
+                                        "type": "integer"
+                                    },
+                                    "code": {
+                                        "type": "string"
+                                    },
+                                    "name": {
+                                        "type": "string"
+                                    },
+                                    "info": {
+                                        "type": "string"
+                                    },
+                                    "is_default": {
+                                        "type": "integer"
+                                    },
+                                    "is_active": {
+                                        "type": "integer"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "success"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "404": {
+                        "description": "Not found."
+                    }
+                }
+            }
+        },
+        "/break_reasons/{id}": {
+            "get": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "BreakReasons"
+                ],
+                "summary": "Get By Id BreakReasons",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "type": "integer",
+                        "required": true,
+                        "description": "Numeric ID of the BreakReasons to get."
+                    }
+                ],
+                "description": "",
+                "responses": {
+                    "200": {
+                        "description": "success"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "404": {
+                        "description": "Not found."
+                    }
+                }
+            },
+            "put": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "BreakReasons"
+                ],
+                "summary": "Update By Id BreakReasons",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "type": "integer",
+                        "required": true,
+                        "description": "Numeric ID of the BreakReasons to get."
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "sort": {
+                                        "type": "integer"
+                                    },
+                                    "code": {
+                                        "type": "string"
+                                    },
+                                    "name": {
+                                        "type": "string"
+                                    },
+                                    "info": {
+                                        "type": "string"
+                                    },
+                                    "is_default": {
+                                        "type": "integer"
+                                    },
+                                    "is_active": {
+                                        "type": "integer"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "description": "",
+                "responses": {
+                    "200": {
+                        "description": "success"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "404": {
+                        "description": "Not found."
+                    }
+                }
+            }
+        },
+        "/break_histories": {
+            "get": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "BreakHistories"
+                ],
+                "summary": "Get All BreakHistories",
+                "description": "",
+                "responses": {
+                    "200": {
+                        "description": "success"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "404": {
+                        "description": "Not found."
+                    }
+                }
+            },
+            "post": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "BreakHistories"
+                ],
+                "summary": "Insert Data BreakHistories",
+                "description": "",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "type": "object",
+                                "required": [
+                                    "user_id",
+                                    "break_start"
+                                ],
+                                "properties": {
+                                    "user_id": {
+                                        "type": "integer"
+                                    },
+                                    "break_start": {
+                                        "type": "date"
+                                    },
+                                    "break_end": {
+                                        "type": "date"
+                                    },
+                                    "total_break": {
+                                        "type": "string"
+                                    },
+                                    "is_active": {
+                                        "type": "integer"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "success"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "404": {
+                        "description": "Not found."
+                    }
+                }
+            }
+        },
+        "/break_histories/{id}": {
+            "get": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "BreakHistories"
+                ],
+                "summary": "Get By Id BreakHistories",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "type": "integer",
+                        "required": true,
+                        "description": "Numeric ID of the BreakHistories to get."
+                    }
+                ],
+                "description": "",
+                "responses": {
+                    "200": {
+                        "description": "success"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "404": {
+                        "description": "Not found."
+                    }
+                }
+            },
+            "put": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "BreakHistories"
+                ],
+                "summary": "Update By Id BreakHistories",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "type": "integer",
+                        "required": true,
+                        "description": "Numeric ID of the BreakHistories to get."
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "user_id": {
+                                        "type": "integer"
+                                    },
+                                    "break_reason_id": {
+                                        "type": "integer"
+                                    },
+                                    "break_start": {
+                                        "type": "date"
+                                    },
+                                    "break_end": {
+                                        "type": "date"
+                                    },
+                                    "total_break": {
+                                        "type": "string"
+                                    },
+                                    "is_active": {
+                                        "type": "integer"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "description": "",
+                "responses": {
+                    "200": {
+                        "description": "success"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "404": {
+                        "description": "Not found."
+                    }
+                }
+            }
+        },
+        "/extensions": {
+            "get": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "Extensions"
+                ],
+                "summary": "Get All extensions",
+                "description": "",
+                "responses": {
+                    "200": {
+                        "description": "success"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "404": {
+                        "description": "Not found."
+                    }
+                }
+            },
+            "post": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "Extensions"
+                ],
+                "summary": "Insert Data extensions",
+                "description": "",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "ext_no": {
+                                        "type": "string"
+                                    },
+                                    "user_id": {
+                                        "type": "integer"
+                                    },
+                                    "last_user_id": {
+                                        "type": "integer"
+                                    },
+                                    "interface": {
+                                        "type": "string"
+                                    },
+                                    "peer_status": {
+                                        "type": "string"
+                                    },
+                                    "updated_at": {
+                                        "type": "date"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "success"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "404": {
+                        "description": "Not found."
+                    }
+                }
+            }
+        },
+        "/extensions/{id}": {
+            "get": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "Extensions"
+                ],
+                "summary": "Get By Id extensions",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "type": "integer",
+                        "required": true,
+                        "description": "Numeric ID of the extensions to get."
+                    }
+                ],
+                "description": "",
+                "responses": {
+                    "200": {
+                        "description": "success"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "404": {
+                        "description": "Not found."
+                    }
+                }
+            },
+            "put": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "Extensions"
+                ],
+                "summary": "Update By Id extensions",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "type": "integer",
+                        "required": true,
+                        "description": "Numeric ID of the extensions to get."
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "ext_no": {
+                                        "type": "string"
+                                    },
+                                    "user_id": {
+                                        "type": "integer"
+                                    },
+                                    "last_user_id": {
+                                        "type": "integer"
+                                    },
+                                    "interface": {
+                                        "type": "string"
+                                    },
+                                    "peer_status": {
+                                        "type": "string"
+                                    },
+                                    "updated_at": {
+                                        "type": "date"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "description": "",
+                "responses": {
+                    "200": {
+                        "description": "success"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "404": {
+                        "description": "Not found."
+                    }
+                }
+            }
+        },
+        "/listen": {
+            "post": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "Listen"
+                ],
+                "summary": "Listen Call",
+                "description": "",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "source": {
+                                        "type": "integer"
+                                    },
+                                    "destination": {
+                                        "type": "integer"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "success"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "404": {
+                        "description": "Not found."
+                    }
+                }
+            }
+        },
+        "/listen/unlisten": {
+            "post": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "Listen"
+                ],
+                "summary": "Un Listen",
+                "description": "",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "channel": {
+                                        "type": "string"
+                                    }
+                                },
+                                "required": [
+                                    "channel"
+                                ]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "success"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "404": {
+                        "description": "Not found."
+                    }
+                }
+            }
+        },
+        "/whisper": {
+            "post": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "Whisper"
+                ],
+                "summary": "Whisper Call",
+                "description": "",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "source": {
+                                        "type": "integer"
+                                    },
+                                    "destination": {
+                                        "type": "integer"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "success"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "404": {
+                        "description": "Not found."
+                    }
+                }
+            }
+        },
+        "/whisper/unwhisper": {
+            "post": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "Whisper"
+                ],
+                "summary": "Un Whisper",
+                "description": "",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "channel": {
+                                        "type": "string"
+                                    }
+                                },
+                                "required": [
+                                    "channel"
+                                ]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "success"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "404": {
+                        "description": "Not found."
+                    }
+                }
+            }
+        },
+        "/mute": {
+            "post": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "Mute"
+                ],
+                "summary": "Mute Call",
+                "description": "",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "channel": {
+                                        "type": "string"
+                                    },
+                                    "direction": {
+                                        "type": "string"
+                                    },
+                                    "state": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "success"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "404": {
+                        "description": "Not found."
+                    }
+                }
+            }
+        },
+        "/transfer": {
+            "post": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "Transfer"
+                ],
+                "summary": "Transfer Call",
+                "description": "",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "channel": {
+                                        "type": "string"
+                                    },
+                                    "destination": {
+                                        "type": "integer"
+                                    },
+                                    "phone_number": {
+                                        "type": "string"
+                                    },
+                                    "username": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "success"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "404": {
+                        "description": "Not found."
+                    }
+                }
+            }
+        },
+        "/outbound/dial": {
+            "post": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "Outbound"
+                ],
+                "summary": "Outbound Call",
+                "description": "",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "source": {
+                                        "type": "string"
+                                    },
+                                    "destination": {
+                                        "type": "integer"
+                                    }
+                                },
+                                "required": [
+                                    "source",
+                                    "destination"
+                                ]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "success"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "404": {
+                        "description": "Not found."
+                    }
+                }
+            }
+        },
+        "/outbound/hangup": {
+            "post": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "Outbound"
+                ],
+                "summary": "Hangup Call",
+                "description": "",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "channel": {
+                                        "type": "string"
+                                    }
+                                },
+                                "required": [
+                                    "channel"
+                                ]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "success"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "404": {
+                        "description": "Not found."
+                    }
+                }
+            }
+        },
+        "/dtmf": {
+            "post": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "DTMF"
+                ],
+                "summary": "Play DTMF",
+                "description": "",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "channel": {
+                                        "type": "string"
+                                    },
+                                    "digit": {
+                                        "type": "integer"
+                                    }
+                                },
+                                "required": [
+                                    "channel",
+                                    "digit"
+                                ]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "success"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "404": {
+                        "description": "Not found."
+                    }
+                }
+            }
+        },
+        "/pickup": {
+            "post": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "Pickup"
+                ],
+                "summary": "Pickup Call",
+                "description": "",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "channel": {
+                                        "type": "string"
+                                    },
+                                    "destination": {
+                                        "type": "integer"
+                                    },
+                                    "phone_number": {
+                                        "type": "string"
+                                    },
+                                    "username": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "success"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "404": {
+                        "description": "Not found."
+                    }
+                }
+            }
+        },
+        "/campaigns": {
+            "get": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "Campaigns"
+                ],
+                "summary": "Get All campaigns",
+                "description": "",
+                "responses": {
+                    "200": {
+                        "description": "success"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "404": {
+                        "description": "Not found."
+                    }
+                }
+            },
+            "post": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "Campaigns"
+                ],
+                "summary": "Insert Campaigns",
+                "description": "",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "sort": {
+                                        "type": "integer"
+                                    },
+                                    "code": {
+                                        "type": "string"
+                                    },
+                                    "media_id": {
+                                        "type": "integer"
+                                    },
+                                    "name": {
+                                        "type": "string"
+                                    },
+                                    "start_date": {
+                                        "type": "date"
+                                    },
+                                    "end_date": {
+                                        "type": "date"
+                                    },
+                                    "last_generate_date": {
+                                        "type": "date"
+                                    },
+                                    "info": {
+                                        "type": "string"
+                                    },
+                                    "is_default": {
+                                        "type": "integer"
+                                    },
+                                    "is_active": {
+                                        "type": "integer"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "success"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "404": {
+                        "description": "Not found."
+                    }
+                }
+            }
+        },
+        "/campaigns/{id}": {
+            "get": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "Campaigns"
+                ],
+                "summary": "Get By Id Campaigns",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "type": "integer",
+                        "required": true,
+                        "description": "Numeric ID of the campaigns to get."
+                    }
+                ],
+                "description": "",
+                "responses": {
+                    "200": {
+                        "description": "success"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "404": {
+                        "description": "Not found."
+                    }
+                }
+            },
+            "put": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "Campaigns"
+                ],
+                "summary": "Update By Id campaigns",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "type": "integer",
+                        "required": true,
+                        "description": "Numeric ID of the campaigns to update."
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "sort": {
+                                        "type": "integer"
+                                    },
+                                    "code": {
+                                        "type": "string"
+                                    },
+                                    "media_id": {
+                                        "type": "integer"
+                                    },
+                                    "name": {
+                                        "type": "string"
+                                    },
+                                    "start_date": {
+                                        "type": "date"
+                                    },
+                                    "end_date": {
+                                        "type": "date"
+                                    },
+                                    "last_generate_date": {
+                                        "type": "date"
+                                    },
+                                    "info": {
+                                        "type": "string"
+                                    },
+                                    "is_default": {
+                                        "type": "integer"
+                                    },
+                                    "is_active": {
+                                        "type": "integer"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "description": "",
+                "responses": {
+                    "200": {
+                        "description": "success"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "404": {
+                        "description": "Not found."
+                    }
+                }
+            }
+        },
+        "/campaign_details": {
+            "get": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "CampaignDetails"
+                ],
+                "summary": "Get All campaigns details",
+                "description": "",
+                "responses": {
+                    "200": {
+                        "description": "success"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "404": {
+                        "description": "Not found."
+                    }
+                }
+            },
+            "post": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "CampaignDetails"
+                ],
+                "summary": "Insert Campaign Details",
+                "description": "",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "tenor": {
+                                        "type": "string"
+                                    },
+                                    "bunga": {
+                                        "type": "string"
+                                    },
+                                    "nominal": {
+                                        "type": "string"
+                                    },
+                                    "limits": {
+                                        "type": "string"
+                                    }
+                                },
+                                "required":["tenor",
+                                    "bunga",
+                                    "nominal",
+                                    "limits"]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "success"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "404": {
+                        "description": "Not found."
+                    }
+                }
+            }
+        },
+        "/campaign_details/{id}": {
+            "get": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "CampaignDetails"
+                ],
+                "summary": "Get By Id CampaignDetails",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "type": "integer",
+                        "required": true,
+                        "description": "Numeric ID of the CampaignDetails to get."
+                    }
+                ],
+                "description": "",
+                "responses": {
+                    "200": {
+                        "description": "success"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "404": {
+                        "description": "Not found."
+                    }
+                }
+            },
+            "put": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "CampaignDetails"
+                ],
+                "summary": "Update By Id CampaignDetails",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "type": "integer",
+                        "required": true,
+                        "description": "Numeric ID of the CampaignDetails to update."
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "tenor": {
+                                        "type": "string"
+                                    },
+                                    "bunga": {
+                                        "type": "string"
+                                    },
+                                    "nominal": {
+                                        "type": "string"
+                                    },
+                                    "limits": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "description": "",
+                "responses": {
+                    "200": {
+                        "description": "success"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "404": {
+                        "description": "Not found."
+                    }
+                }
+            }
+        },
+        "/campaign_users": {
+            "get": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "CampaignUsers"
+                ],
+                "summary": "Get All CampaignUsers",
+                "description": "",
+                "responses": {
+                    "200": {
+                        "description": "success"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "404": {
+                        "description": "Not found."
+                    }
+                }
+            },
+            "post": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "CampaignUsers"
+                ],
+                "summary": "Insert CampaignUsers",
+                "description": "",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "campaign_id": {
+                                        "type": "integer"
+                                    },
+                                    "user_id": {
+                                        "type": "integer"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "success"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "404": {
+                        "description": "Not found."
+                    }
+                }
+            }
+        },
+        "/campaign_users/{id}": {
+            "get": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "CampaignUsers"
+                ],
+                "summary": "Get By Id CampaignUsers",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "type": "integer",
+                        "required": true,
+                        "description": "Numeric ID of the CampaignUsers to get."
+                    }
+                ],
+                "description": "",
+                "responses": {
+                    "200": {
+                        "description": "success"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "404": {
+                        "description": "Not found."
+                    }
+                }
+            },
+            "put": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "CampaignUsers"
+                ],
+                "summary": "Update By Id CampaignUsers",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "type": "integer",
+                        "required": true,
+                        "description": "Numeric ID of the CampaignUsers to update."
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "campaign_id": {
+                                        "type": "integer"
+                                    },
+                                    "user_id": {
+                                        "type": "integer"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "description": "",
+                "responses": {
+                    "200": {
+                        "description": "success"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "404": {
+                        "description": "Not found."
+                    }
+                }
+            }
+        },
+        "/customer_fields": {
+            "get": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "CustomerFields"
+                ],
+                "summary": "Get All CustomerFields",
+                "description": "",
+                "responses": {
+                    "200": {
+                        "description": "success"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "404": {
+                        "description": "Not found."
+                    }
+                }
+            },
+            "post": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "CustomerFields"
+                ],
+                "summary": "Insert CustomerFields",
+                "description": "",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "sort": {
+                                        "type": "string"
+                                    },
+                                    "field_name": {
+                                        "type": "string"
+                                    },
+                                    "field_display_name": {
+                                        "type": "string"
+                                    },
+                                    "data_type_id": {
+                                        "type": "integer"
+                                    },
+                                    "is_active": {
+                                        "type": "integer"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "success"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "404": {
+                        "description": "Not found."
+                    }
+                }
+            }
+        },
+        "/customer_fields/{id}": {
+            "get": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "CustomerFields"
+                ],
+                "summary": "Get By Id CustomerFields",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "type": "integer",
+                        "required": true,
+                        "description": "Numeric ID of the CustomerFields to get."
+                    }
+                ],
+                "description": "",
+                "responses": {
+                    "200": {
+                        "description": "success"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "404": {
+                        "description": "Not found."
+                    }
+                }
+            },
+            "put": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "CustomerFields"
+                ],
+                "summary": "Update By Id CustomerFields",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "type": "integer",
+                        "required": true,
+                        "description": "Numeric ID of the CustomerFields to update."
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "sort": {
+                                        "type": "string"
+                                    },
+                                    "field_name": {
+                                        "type": "string"
+                                    },
+                                    "field_display_name": {
+                                        "type": "string"
+                                    },
+                                    "data_type_id": {
+                                        "type": "integer"
+                                    },
+                                    "is_active": {
+                                        "type": "integer"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "description": "",
+                "responses": {
+                    "200": {
+                        "description": "success"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "404": {
+                        "description": "Not found."
+                    }
+                }
+            }
+        },
+        "/callbacks": {
+            "get": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "Callbacks"
+                ],
+                "summary": "Get All Callbacks",
+                "description": "",
+                "responses": {
+                    "200": {
+                        "description": "success"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "404": {
+                        "description": "Not found."
+                    }
+                }
+            },
+            "post": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "Callbacks"
+                ],
+                "summary": "Insert Callbacks",
+                "description": "",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "campaign_id": {
+                                        "type": "integer"
+                                    },
+                                    "customer_id": {
+                                        "type": "integer"
+                                    },
+                                    "phone_no": {
+                                        "type": "string"
+                                    },
+                                    "user_id": {
+                                        "type": "integer"
+                                    },
+                                    "callback_time": {
+                                        "type": "date"
+                                    },
+                                    "is_req_callfile": {
+                                        "type": "integer"
+                                    },
+                                    "is_called": {
+                                        "type": "integer"
+                                    },
+                                    "call_id": {
+                                        "type": "integer"
+                                    },
+                                    "created_at": {
+                                        "type": "date"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "success"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "404": {
+                        "description": "Not found."
+                    }
+                }
+            }
+        },
+        "/callbacks/{id}": {
+            "get": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "Callbacks"
+                ],
+                "summary": "Get By Id Callbacks",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "type": "integer",
+                        "required": true,
+                        "description": "Numeric ID of the Callbacks to get."
+                    }
+                ],
+                "description": "",
+                "responses": {
+                    "200": {
+                        "description": "success"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "404": {
+                        "description": "Not found."
+                    }
+                }
+            },
+            "put": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "Callbacks"
+                ],
+                "summary": "Update By Id Callbacks",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "type": "integer",
+                        "required": true,
+                        "description": "Numeric ID of the Callbacks to update."
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "campaign_id": {
+                                        "type": "integer"
+                                    },
+                                    "customer_id": {
+                                        "type": "integer"
+                                    },
+                                    "phone_no": {
+                                        "type": "string"
+                                    },
+                                    "user_id": {
+                                        "type": "integer"
+                                    },
+                                    "callback_time": {
+                                        "type": "date"
+                                    },
+                                    "is_req_callfile": {
+                                        "type": "integer"
+                                    },
+                                    "is_called": {
+                                        "type": "integer"
+                                    },
+                                    "call_id": {
+                                        "type": "integer"
+                                    },
+                                    "created_at": {
+                                        "type": "date"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "description": "",
+                "responses": {
+                    "200": {
+                        "description": "success"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "404": {
+                        "description": "Not found."
+                    }
+                }
+            }
+        },
+        "/emails": {
+            "get": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "Emails"
+                ],
+                "summary": "Get All Emails",
+                "description": "",
+                "responses": {
+                    "200": {
+                        "description": "success"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "404": {
+                        "description": "Not found."
+                    }
+                }
+            },
+            "post": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "Emails"
+                ],
+                "summary": "Insert Emails",
+                "description": "",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "type": "object",
+                                "required": [
+                                    "direction_id",
+                                    "mail_date",
+                                    "email_from",
+                                    "email_to",
+                                    "subject",
+                                    "content",
+                                    "content_html"
+                                ],
+                                "properties": {
+                                    "gtw_id": {
+                                        "type": "string"
+                                    },
+                                    "is_blocking": {
+                                        "type": "integer"
+                                    },
+                                    "direction_id": {
+                                        "type": "integer"
+                                    },
+                                    "mail_date": {
+                                        "type": "date"
+                                    },
+                                    "subject": {
+                                        "type": "string"
+                                    },
+                                    "email_from": {
+                                        "type": "string"
+                                    },
+                                    "email_to": {
+                                        "type": "string"
+                                    },
+                                    "email_cc": {
+                                        "type": "string"
+                                    },
+                                    "email_bcc": {
+                                        "type": "string"
+                                    },
+                                    "content": {
+                                        "type": "string"
+                                    },
+                                    "content_html": {
+                                        "type": "string"
+                                    },
+                                    "note": {
+                                        "type": "string"
+                                    },
+                                    "mail_error_info": {
+                                        "type": "string"
+                                    },
+                                    "outbound_category_id": {
+                                        "type": "integer"
+                                    },
+                                    "outbound_category_detail_id": {
+                                        "type": "integer"
+                                    },
+                                    "is_complete": {
+                                        "type": "integer"
+                                    },
+                                    "uid": {
+                                        "type": "string"
+                                    },
+                                    "user_id": {
+                                        "type": "integer"
+                                    },
+                                    "campaign_id": {
+                                        "type": "integer"
+                                    },
+                                    "customer_id": {
+                                        "type": "integer"
+                                    },
+                                    "read_at": {
+                                        "type": "date"
+                                    },
+                                    "read_by": {
+                                        "type": "integer"
+                                    },
+                                    "reply_id": {
+                                        "type": "integer"
+                                    },
+                                    "reply_at": {
+                                        "type": "date"
+                                    },
+                                    "reply_by": {
+                                        "type": "integer"
+                                    },
+                                    "forward_at": {
+                                        "type": "date"
+                                    },
+                                    "forward_by": {
+                                        "type": "integer"
+                                    },
+                                    "created_at": {
+                                        "type": "date"
+                                    },
+                                    "created_by": {
+                                        "type": "integer"
+                                    },
+                                    "updated_at": {
+                                        "type": "date"
+                                    },
+                                    "updated_by": {
+                                        "type": "integer"
+                                    },
+                                    "cust_name": {
+                                        "type": "string"
+                                    },
+                                    "inbound_type_detail": {
+                                        "type": "string"
+                                    },
+                                    "source_media_id": {
+                                        "type": "integer"
+                                    },
+                                    "send_error_attempt": {
+                                        "type": "string"
+                                    },
+                                    "is_spam": {
+                                        "type": "integer"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "success"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "404": {
+                        "description": "Not found."
+                    }
+                }
+            }
+        },
+        "/emails/{id}": {
+            "get": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "Emails"
+                ],
+                "summary": "Get By Id Emails",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "type": "integer",
+                        "required": true,
+                        "description": "Numeric ID of the Emails to get."
+                    }
+                ],
+                "description": "",
+                "responses": {
+                    "200": {
+                        "description": "success"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "404": {
+                        "description": "Not found."
+                    }
+                }
+            },
+            "put": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "Emails"
+                ],
+                "summary": "Update By Id Emails",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "type": "integer",
+                        "required": true,
+                        "description": "Numeric ID of the Emails to update."
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "gtw_id": {
+                                        "type": "string"
+                                    },
+                                    "is_blocking": {
+                                        "type": "integer"
+                                    },
+                                    "direction_id": {
+                                        "type": "integer"
+                                    },
+                                    "mail_date": {
+                                        "type": "date"
+                                    },
+                                    "subject": {
+                                        "type": "string"
+                                    },
+                                    "email_from": {
+                                        "type": "string"
+                                    },
+                                    "email_to": {
+                                        "type": "string"
+                                    },
+                                    "email_cc": {
+                                        "type": "string"
+                                    },
+                                    "email_bcc": {
+                                        "type": "string"
+                                    },
+                                    "content": {
+                                        "type": "string"
+                                    },
+                                    "content_html": {
+                                        "type": "string"
+                                    },
+                                    "note": {
+                                        "type": "string"
+                                    },
+                                    "mail_error_info": {
+                                        "type": "string"
+                                    },
+                                    "outbound_category_id": {
+                                        "type": "integer"
+                                    },
+                                    "outbound_category_detail_id": {
+                                        "type": "integer"
+                                    },
+                                    "is_complete": {
+                                        "type": "integer"
+                                    },
+                                    "uid": {
+                                        "type": "string"
+                                    },
+                                    "user_id": {
+                                        "type": "integer"
+                                    },
+                                    "campaign_id": {
+                                        "type": "integer"
+                                    },
+                                    "customer_id": {
+                                        "type": "integer"
+                                    },
+                                    "read_at": {
+                                        "type": "date"
+                                    },
+                                    "read_by": {
+                                        "type": "integer"
+                                    },
+                                    "reply_id": {
+                                        "type": "integer"
+                                    },
+                                    "reply_at": {
+                                        "type": "date"
+                                    },
+                                    "reply_by": {
+                                        "type": "integer"
+                                    },
+                                    "forward_at": {
+                                        "type": "date"
+                                    },
+                                    "forward_by": {
+                                        "type": "integer"
+                                    },
+                                    "created_at": {
+                                        "type": "date"
+                                    },
+                                    "created_by": {
+                                        "type": "integer"
+                                    },
+                                    "updated_at": {
+                                        "type": "date"
+                                    },
+                                    "updated_by": {
+                                        "type": "integer"
+                                    },
+                                    "cust_name": {
+                                        "type": "string"
+                                    },
+                                    "inbound_type_detail": {
+                                        "type": "string"
+                                    },
+                                    "source_media_id": {
+                                        "type": "integer"
+                                    },
+                                    "send_error_attempt": {
+                                        "type": "string"
+                                    },
+                                    "is_spam": {
+                                        "type": "integer"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "description": "",
+                "responses": {
+                    "200": {
+                        "description": "success"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "404": {
+                        "description": "Not found."
+                    }
+                }
+            }
+        },
+        "/quality_assurance": {
+            "get": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "QualityAssurance"
+                ],
+                "summary": "Get All QualityAssurance",
+                "description": "",
+                "responses": {
+                    "200": {
+                        "description": "success"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "404": {
+                        "description": "Not found."
+                    }
+                }
+            },
+            "post": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "QualityAssurance"
+                ],
+                "summary": "Insert QualityAssurance",
+                "description": "",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "type": "object",
+                                "required": [
+                                    "name",
+                                    "is_active"
+                                ],
+                                "properties": {
+                                    "sort": {
+                                        "type": "string"
+                                    },
+                                    "name": {
+                                        "type": "string"
+                                    },
+                                    "info": {
+                                        "type": "string"
+                                    },
+                                    "is_active": {
+                                        "type": "integer"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "success"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "404": {
+                        "description": "Not found."
+                    }
+                }
+            }
+        },
+        "/quality_assurance/{id}": {
+            "get": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "QualityAssurance"
+                ],
+                "summary": "Get By Id QualityAssurance",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "type": "integer",
+                        "required": true,
+                        "description": "Numeric ID of the QualityAssurance to get."
+                    }
+                ],
+                "description": "",
+                "responses": {
+                    "200": {
+                        "description": "success"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "404": {
+                        "description": "Not found."
+                    }
+                }
+            },
+            "put": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "QualityAssurance"
+                ],
+                "summary": "Update By Id QualityAssurance",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "type": "integer",
+                        "required": true,
+                        "description": "Numeric ID of the QualityAssurance to update."
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "sort": {
+                                        "type": "string"
+                                    },
+                                    "name": {
+                                        "type": "string"
+                                    },
+                                    "info": {
+                                        "type": "string"
+                                    },
+                                    "is_active": {
+                                        "type": "integer"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "description": "",
+                "responses": {
+                    "200": {
+                        "description": "success"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "404": {
+                        "description": "Not found."
+                    }
+                }
+            }
+        },
+        "/quality_assurance_aspects": {
+            "get": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "QualityAssuranceAspects"
+                ],
+                "summary": "Get All QualityAssuranceAspects",
+                "description": "",
+                "responses": {
+                    "200": {
+                        "description": "success"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "404": {
+                        "description": "Not found."
+                    }
+                }
+            },
+            "post": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "QualityAssuranceAspects"
+                ],
+                "summary": "Insert QualityAssuranceAspects",
+                "description": "",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "type": "object",
+                                "required": [
+                                    "quality_assurance_id",
+                                    "aspect_name",
+                                    "is_active"
+                                ],
+                                "properties": {
+                                    "sort": {
+                                        "type": "string"
+                                    },
+                                    "quality_assurance_id": {
+                                        "type": "integer"
+                                    },
+                                    "aspect_name": {
+                                        "type": "string"
+                                    },
+                                    "bobot": {
+                                        "type": "string"
+                                    },
+                                    "info": {
+                                        "type": "string"
+                                    },
+                                    "is_active": {
+                                        "type": "integer"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "success"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "404": {
+                        "description": "Not found."
+                    }
+                }
+            }
+        },
+        "/quality_assurance_aspects/{id}": {
+            "get": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "QualityAssuranceAspects"
+                ],
+                "summary": "Get By Id QualityAssuranceAspects",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "type": "integer",
+                        "required": true,
+                        "description": "Numeric ID of the QualityAssuranceAspects to get."
+                    }
+                ],
+                "description": "",
+                "responses": {
+                    "200": {
+                        "description": "success"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "404": {
+                        "description": "Not found."
+                    }
+                }
+            },
+            "put": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "QualityAssuranceAspects"
+                ],
+                "summary": "Update By Id QualityAssuranceAspects",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "type": "integer",
+                        "required": true,
+                        "description": "Numeric ID of the QualityAssuranceAspects to update."
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "sort": {
+                                        "type": "string"
+                                    },
+                                    "quality_assurance_id": {
+                                        "type": "integer"
+                                    },
+                                    "aspect_name": {
+                                        "type": "string"
+                                    },
+                                    "bobot": {
+                                        "type": "string"
+                                    },
+                                    "info": {
+                                        "type": "string"
+                                    },
+                                    "is_active": {
+                                        "type": "integer"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "description": "",
+                "responses": {
+                    "200": {
+                        "description": "success"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "404": {
+                        "description": "Not found."
+                    }
+                }
+            }
+        },
+        "/quality_assurance_users": {
+            "get": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "QualityAssuranceUsers"
+                ],
+                "summary": "Get All QualityAssuranceUsers",
+                "description": "",
+                "responses": {
+                    "200": {
+                        "description": "success"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "404": {
+                        "description": "Not found."
+                    }
+                }
+            },
+            "post": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "QualityAssuranceUsers"
+                ],
+                "summary": "Insert QualityAssuranceUsers",
+                "description": "",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "type": "object",
+                                "required": [
+                                    "quality_assurance_id",
+                                    "user_id",
+                                    "call_id"
+                                ],
+                                "properties": {
+                                    "quality_assurance_id": {
+                                        "type": "integer"
+                                    },
+                                    "user_id": {
+                                        "type": "integer"
+                                    },
+                                    "call_id": {
+                                        "type": "integer"
+                                    },
+                                    "quality_assurance_date": {
+                                        "type": "date"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "success"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "404": {
+                        "description": "Not found."
+                    }
+                }
+            }
+        },
+        "/quality_assurance_users/{id}": {
+            "get": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "QualityAssuranceUsers"
+                ],
+                "summary": "Get By Id QualityAssuranceUsers",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "type": "integer",
+                        "required": true,
+                        "description": "Numeric ID of the QualityAssuranceDetails to get."
+                    }
+                ],
+                "description": "",
+                "responses": {
+                    "200": {
+                        "description": "success"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "404": {
+                        "description": "Not found."
+                    }
+                }
+            },
+            "put": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "QualityAssuranceUsers"
+                ],
+                "summary": "Update By Id QualityAssuranceUsers",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "type": "integer",
+                        "required": true,
+                        "description": "Numeric ID of the QualityAssuranceUsers to update."
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "quality_assurance_id": {
+                                        "type": "integer"
+                                    },
+                                    "user_id": {
+                                        "type": "integer"
+                                    },
+                                    "call_id": {
+                                        "type": "integer"
+                                    },
+                                    "quality_assurance_date": {
+                                        "type": "date"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "description": "",
+                "responses": {
+                    "200": {
+                        "description": "success"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "404": {
+                        "description": "Not found."
+                    }
+                }
+            }
+        },
+        "/quality_assurance_details": {
+            "get": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "QualityAssuranceDetails"
+                ],
+                "summary": "Get All QualityAssuranceDetails",
+                "description": "",
+                "responses": {
+                    "200": {
+                        "description": "success"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "404": {
+                        "description": "Not found."
+                    }
+                }
+            },
+            "post": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "QualityAssuranceDetails"
+                ],
+                "summary": "Insert QualityAssuranceDetails",
+                "description": "",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "type": "object",
+                                "required": [
+                                    "quality_assurance_user_id",
+                                    "quality_assurance_aspect_id"
+                                ],
+                                "properties": {
+                                    "quality_assurance_user_id": {
+                                        "type": "integer"
+                                    },
+                                    "quality_assurance_aspect_id": {
+                                        "type": "integer"
+                                    },
+                                    "result": {
+                                        "type": "string"
+                                    },
+                                    "create_date": {
+                                        "type": "date"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "success"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "404": {
+                        "description": "Not found."
+                    }
+                }
+            }
+        },
+        "/quality_assurance_details/{id}": {
+            "get": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "QualityAssuranceDetails"
+                ],
+                "summary": "Get By Id QualityAssuranceDetails",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "type": "integer",
+                        "required": true,
+                        "description": "Numeric ID of the QualityAssuranceDetails to get."
+                    }
+                ],
+                "description": "",
+                "responses": {
+                    "200": {
+                        "description": "success"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "404": {
+                        "description": "Not found."
+                    }
+                }
+            },
+            "put": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "QualityAssuranceDetails"
+                ],
+                "summary": "Update By Id QualityAssuranceDetails",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "type": "integer",
+                        "required": true,
+                        "description": "Numeric ID of the QualityAssuranceDetails to update."
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "quality_assurance_user_id": {
+                                        "type": "integer"
+                                    },
+                                    "quality_assurance_aspect_id": {
+                                        "type": "integer"
+                                    },
+                                    "result": {
+                                        "type": "string"
+                                    },
+                                    "create_date": {
+                                        "type": "date"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "description": "",
+                "responses": {
+                    "200": {
+                        "description": "success"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "404": {
+                        "description": "Not found."
+                    }
+                }
+            }
+        }
+    },
+    "schemes": [
+        "http"
+    ],
+    "consumes": [
+        "application/json"
+    ],
+    "produces": [
+        "application/json"
+    ]
+}

@@ -1,0 +1,11 @@
+.vscode/
+log/
+logs/
+node_modules/
+public/
+file_reports/
+file_voices/
+package-lock.json
+
+
+
