@@ -61,7 +61,8 @@ const config = {
 	folderNameReport:process.env.FOLDER_NAME_REPORT,
 	folderNameVoice:process.env.FOLDER_NAME_VOICE,
 	voiceServer: process.env.VOICE_SERVER,
-	user_passwd_default:process.env.USER_PASWD_DEFAULT
+	user_passwd_default:process.env.USER_PASWD_DEFAULT,
+	data_limit:process.env.DATA_LIMIT
 
 }
 

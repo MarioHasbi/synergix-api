@@ -1,7 +1,9 @@
 const dbQueryHelper = require('../helpers/db_query')
 const table = 'calls'
 const dateFormat = require('dateformat')
-const excel = require('../helpers/generate_excel')
+const excel = require('../helpers/excel_generator')
+const thread = require('../helpers/thread')
+
 exports.getAll = async (conditions) => {
     const customConditions = []
     const columnSelect = ["id"]
@@ -58,6 +60,7 @@ exports.generateFile = async (conditions) => {
         value.duration, value.note, value.outbound_statuses, value.outbound_categories, value.outbound_category_details,
         value.filename, value.host_address])
     })
-    const generate = await excel(header, concatData, `${filename}-${dateFormat(conditions.start, 'yyyy-mm-dd')}`)
+    // const generate = await excel.excel_generator(header, concatData, `${filename}-${dateFormat(conditions.start, 'yyyy-mm-dd')}`)
+    const generate = await thread.create({task: 'export-report'},header, concatData, `${filename}-${dateFormat(conditions.start, 'yyyy-mm-dd')}`)
     return generate
 }

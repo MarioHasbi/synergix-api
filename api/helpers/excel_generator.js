@@ -7,6 +7,7 @@ const { Console } = require("console");
 exports.excel_generator = async (header = [], data = [], fileName, dates, timeColumn = [], tableLine = [], title, mergeCells) => {
     return new Promise((resolve, reject) => {
         try {
+          
             let workbook = new Excel.Workbook()
             let ws = workbook.addWorksheet('Report 1')
             const datas = data
@@ -65,11 +66,11 @@ exports.excel_generator = async (header = [], data = [], fileName, dates, timeCo
                 bold: true
             };
             ws.getCell('A1').alignment = { vertical: 'middle', horizontal: 'center' };
-
+           
             workbook.xlsx.writeFile(`${config.folderNameReport}${path.sep}${fileName}.xlsx`);
             resolve({
-                filename: `${fileName}.xlsx`,
-                url: `/downloads/${fileName}.xlsx`
+                    filename: `${fileName}.xlsx`,
+                    url: `/downloads/${fileName}.xlsx`
             })
         } catch (e) {
             reject(e)

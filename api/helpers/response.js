@@ -1,6 +1,7 @@
 const _ = require('lodash')
 const moment = require('moment-timezone')
 moment.tz.setDefault('Asia/Jakarta')
+const config = require('../config/index')
 
 /**
  * OK 200
@@ -14,7 +15,9 @@ exports.sendSuccessData = function (res, data) {
 		response_code: 200,
 		success: true,
 		total_data: data.total_data || 0,
-		data: data.data || {},
+		limit : config.data_limit,
+		data: data.data || {}
+		
 	}
 	
 	if (data.limit > 0 && data.total_data > 0) {

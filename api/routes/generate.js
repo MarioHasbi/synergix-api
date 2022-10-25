@@ -11,9 +11,10 @@ router.get('/report-call-activity', async (req, res, next) => {
         return response.sendBadRequest(res, 'Invalid Data')
     }
     const result = {
+        total_data: 1 ,
         data: {
-            url: "http://"+req.headers.host + generate.url,
-            filename: generate.filename
+            url: "https://"+req.headers.host + generate.data.url,
+            filename: generate.data.filename
         }
     }
     return response.sendSuccessData(res, result)
@@ -26,9 +27,10 @@ router.get('/report-performance', async (req, res, next) => {
         return response.sendBadRequest(res, 'Invalid Data')
     }
     const result = {
+        total_data: 1 ,
         data: {
-            url: "http://"+req.headers.host + generate.url,
-            filename: generate.filename
+            url: "https://"+req.headers.host + generate.data.url,
+            filename: generate.data.filename
         }
     }
     return response.sendSuccessData(res, result)
@@ -41,10 +43,12 @@ router.get('/report-call-customer', async (req, res) => {
     if (generate === null) {
         return response.sendBadRequest(res, 'Invalid Data')
     }
+   
     const result = {
+        total_data: 1 ,
         data: {
-            url: "http://"+req.headers.host + generate.url,
-            filename: generate.filename
+            url: "https://"+req.headers.host + generate.data.url,
+            filename: generate.data.filename
         }
     }
     return response.sendSuccessData(res, result)
@@ -57,9 +61,10 @@ router.get('/report-bussiness-achivement', async (req, res) => {
         return response.sendBadRequest(res, 'Invalid Data')
     }
     const result = {
+        total_data: 1 ,
         data: {
-            url: "http://"+req.headers.host + generate.url,
-            filename: generate.filename
+            url: "https://"+req.headers.host + generate.data.url,
+            filename: generate.data.filename
         }
     }
     return response.sendSuccessData(res, result)
@@ -72,9 +77,10 @@ router.get('/report-cost-viewer', async (req, res) => {
         return response.sendBadRequest(res, 'Invalid Data')
     }
     const result = {
+        total_data: 1 ,
         data: {
-            url: "http://"+req.headers.host + generate.url,
-            filename: generate.filename
+            url: "https://"+req.headers.host + generate.data.url,
+            filename: generate.data.filename
         }
     }
     return response.sendSuccessData(res, result)
@@ -87,9 +93,10 @@ router.get('/export-qa-details', async (req, res) => {
         return response.sendBadRequest(res, 'Invalid Data')
     }
     const result = {
+        total_data: 1 ,
         data: {
-            url: "http://"+req.headers.host + generate.url,
-            filename: generate.filename
+            url: "https://"+req.headers.host + generate.data.url,
+            filename: generate.data.filename
         }
     }
     return response.sendSuccessData(res, result)
@@ -102,9 +109,10 @@ router.get('/report-qa-summaries', async (req, res) => {
         return response.sendBadRequest(res, 'Invalid Data')
     }
     const result = {
+        total_data: 1 ,
         data: {
-            url: "http://"+req.headers.host + generate.url,
-            filename: generate.filename
+            url: "https://"+req.headers.host + generate.data.url,
+            filename: generate.data.filename
         }
     }
     return response.sendSuccessData(res, result)
@@ -116,9 +124,10 @@ router.get('/report-emails', async (req, res) => {
         return response.sendBadRequest(res, 'Invalid Data')
     }
     const result = {
+        total_data: 1 ,
         data: {
-            url: "http://"+req.headers.host + generate.url,
-            filename: generate.filename
+            url: "https://"+req.headers.host + generate.data.url,
+            filename: generate.data.filename
         }
     }
     return response.sendSuccessData(res, result)
@@ -131,9 +140,10 @@ router.get('/report-break', async (req, res) => {
         return response.sendBadRequest(res, 'Invalid Data')
     }
     const result = {
+        total_data: 1 ,
         data: {
-            url: "http://"+req.headers.host + generate.url,
-            filename: generate.filename
+            url: "https://"+req.headers.host + generate.data.url,
+            filename: generate.data.filename
         }
     }
     return response.sendSuccessData(res, result)
@@ -146,9 +156,10 @@ router.get('/report-checker', async (req, res) => {
         return response.sendBadRequest(res, 'Invalid Data')
     }
     const result = {
+        total_data: 1 ,
         data: {
-            url: "http://"+req.headers.host + generate.url,
-            filename: generate.filename
+            url: "https://"+req.headers.host + generate.data.url,
+            filename: generate.data.filename
         }
     }
     return response.sendSuccessData(res, result)
@@ -161,9 +172,10 @@ router.get('/report-call-details', async (req, res) => {
         return response.sendBadRequest(res, 'Invalid Data')
     }
     const result = {
+        total_data: 1 ,
         data: {
-            url: "http://"+req.headers.host + generate.url,
-            filename: generate.filename
+            url: "https://"+req.headers.host + generate.data.url,
+            filename: generate.data.filename
         }
     }
     return response.sendSuccessData(res, result)
