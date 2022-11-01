@@ -442,21 +442,6 @@ exports.getBussinesssAchivement = async (conditions) => {
         `ROUND( AVG( customers.amount ), 0 ) AS average_customer_nominal_approved`,
     ]
 
-    if (conditions.start !== undefined) {
-        const start = dateFormat(conditions.start, 'yyyy-mm-dd')
-        let end = start
-        if (conditions.end !== undefined)
-            end = dateFormat(conditions.end, 'yyyy-mm-dd')
-        else
-            end = dateFormat(conditions.start, 'yyyy-mm-dd')
-        let custom = `DATE(${table}.call_date) BETWEEN "${start}" AND "${end}" `
-        customConditions.push(custom)
-    } else if (conditions.date !== undefined) {
-        customConditions.push(`DATE(${table}.call_date) = '${conditions.date}'`)
-    } else {
-        customConditions.push(`DATE(${table}.call_date) = CURRENT_DATE`)
-    }
-
     if (conditions.limit !== undefined) {
         conditions.limit = conditions.limit
     } else {
@@ -464,7 +449,7 @@ exports.getBussinesssAchivement = async (conditions) => {
     }
 
 
-    customConditions.push(`calls.outbound_category_id = 1`)
+    customConditions.push(`calls.outbound_category_id = 1 AND customers.amount IS NOT NULL `)
 
     const join = [
         `JOIN customers ON customers.id = ${table}.customer_id `,

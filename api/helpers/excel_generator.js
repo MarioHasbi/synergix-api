@@ -7,7 +7,6 @@ const { Console } = require("console");
 exports.excel_generator = async (header = [], data = [], fileName, dates, timeColumn = [], tableLine = [], title, mergeCells) => {
     return new Promise((resolve, reject) => {
         try {
-          
             let workbook = new Excel.Workbook()
             let ws = workbook.addWorksheet('Report 1')
             const datas = data
@@ -66,11 +65,11 @@ exports.excel_generator = async (header = [], data = [], fileName, dates, timeCo
                 bold: true
             };
             ws.getCell('A1').alignment = { vertical: 'middle', horizontal: 'center' };
-           
+
             workbook.xlsx.writeFile(`${config.folderNameReport}${path.sep}${fileName}.xlsx`);
             resolve({
-                    filename: `${fileName}.xlsx`,
-                    url: `/downloads/${fileName}.xlsx`
+                filename: `${fileName}.xlsx`,
+                url: `/downloads/${fileName}.xlsx`
             })
         } catch (e) {
             reject(e)
@@ -83,7 +82,6 @@ exports.excel_generator = async (header = [], data = [], fileName, dates, timeCo
 exports.excel_generator_qa = async (header = [], data = [], fileName,  timeColumn = [], tableLine = [], title, mergeCells , mergeCells2,  calldate, durasi, customer_name, card_number, QA_by, agent, qa_notes, periods, total) => {
     return new Promise((resolve, reject) => {
         try {
-            console.log(total)
             let workbook = new Excel.Workbook()
             let ws = workbook.addWorksheet('Report 1')
             const datas = data
@@ -103,10 +101,10 @@ exports.excel_generator_qa = async (header = [], data = [], fileName,  timeColum
                 })
                 
                 
-                const figureColumns = timeColumn
-                figureColumns.forEach((i) => {
-                    ws.getColumn(i).numFmt = 'hh:mm:ss';
-                })
+                // const figureColumns = timeColumn
+                // figureColumns.forEach((i) => {
+                //     ws.getColumn(i).numFmt = 'hh:mm:ss';
+                // })
                
                
 

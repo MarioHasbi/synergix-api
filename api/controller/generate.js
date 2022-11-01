@@ -54,18 +54,21 @@ exports.generateReport = async (conditions, report = 0) => {
         const mergeCells = "A1:K2";
         const data_report = data;
 
-        const fileName = `${filename}-${dateFormat(conditions.date, 'yyyy-mm-dd-HH-MM-ss')}`;
+        const fileName = `${filename}-${dateFormat(
+          conditions.date,
+          "yyyy-mm-dd-HH-MM-ss"
+        )}`;
         generate = await thread.create({
-         task: "export-report",
-         header,
-         data_report,
-         fileName,
-         dates,
-         timeColumn,
-         tableLine,
-         title,
-         mergeCells,
-       });
+          task: "export-report",
+          header,
+          data_report,
+          fileName,
+          dates,
+          timeColumn,
+          tableLine,
+          title,
+          mergeCells,
+        });
 
         return generate;
       }
@@ -171,18 +174,21 @@ exports.generateReport = async (conditions, report = 0) => {
         ];
         const mergeCells = "A1:AK2";
 
-        const fileName = `${filename}-${dateFormat(conditions.date, 'yyyy-mm-dd-HH-MM-ss')}`;
+        const fileName = `${filename}-${dateFormat(
+          conditions.date,
+          "yyyy-mm-dd-HH-MM-ss"
+        )}`;
         generate = await thread.create({
-         task: "export-report",
-         header,
-         data_report,
-         fileName,
-         dates,
-         timeColumn,
-         tableLine,
-         title,
-         mergeCells,
-       });
+          task: "export-report",
+          header,
+          data_report,
+          fileName,
+          dates,
+          timeColumn,
+          tableLine,
+          title,
+          mergeCells,
+        });
         return generate;
       }
       break;
@@ -246,11 +252,13 @@ exports.generateReport = async (conditions, report = 0) => {
           "P",
         ];
         const mergeCells = "A1:P2";
-       
 
-         //generate = await excel.excel_generator(header, data_report, `${filename}-${dateFormat(conditions.date, 'yyyy-mm-dd-HH-mm-ss')}`, dates, timeColumn, tableLine, title, mergeCells)
-         const fileName = `${filename}-${dateFormat(conditions.date, 'yyyy-mm-dd-HH-MM-ss')}`;
-         generate = await thread.create({
+        //generate = await excel.excel_generator(header, data_report, `${filename}-${dateFormat(conditions.date, 'yyyy-mm-dd-HH-mm-ss')}`, dates, timeColumn, tableLine, title, mergeCells)
+        const fileName = `${filename}-${dateFormat(
+          conditions.date,
+          "yyyy-mm-dd-HH-MM-ss"
+        )}`;
+        generate = await thread.create({
           task: "export-report",
           header,
           data_report,
@@ -297,18 +305,21 @@ exports.generateReport = async (conditions, report = 0) => {
         const tableLine = ["A", "B", "C", "D", "E", "F"];
         const mergeCells = "A1:F2";
 
-        const fileName = `${filename}-${dateFormat(conditions.date, 'yyyy-mm-dd-HH-MM-ss')}`;
+        const fileName = `${filename}-${dateFormat(
+          conditions.date,
+          "yyyy-mm-dd-HH-MM-ss"
+        )}`;
         generate = await thread.create({
-         task: "export-report",
-         header,
-         data_report,
-         fileName,
-         dates,
-         timeColumn,
-         tableLine,
-         title,
-         mergeCells,
-       });
+          task: "export-report",
+          header,
+          data_report,
+          fileName,
+          dates,
+          timeColumn,
+          tableLine,
+          title,
+          mergeCells,
+        });
 
         return generate;
       }
@@ -341,24 +352,31 @@ exports.generateReport = async (conditions, report = 0) => {
         const tableLine = ["A", "B", "C", "D", "E"];
         const mergeCells = "A1:E2";
 
-        const fileName = `${filename}-${dateFormat(conditions.date, 'yyyy-mm-dd-HH-MM-ss')}`;
+        const fileName = `${filename}-${dateFormat(
+          conditions.date,
+          "yyyy-mm-dd-HH-MM-ss"
+        )}`;
         generate = await thread.create({
-         task: "export-report",
-         header,
-         data_report,
-         fileName,
-         dates,
-         timeColumn,
-         tableLine,
-         title,
-         mergeCells,
-       });
+          task: "export-report",
+          header,
+          data_report,
+          fileName,
+          dates,
+          timeColumn,
+          tableLine,
+          title,
+          mergeCells,
+        });
 
         return generate;
       }
       break;
     case "6":
       {
+        const dates =
+          conditions.date !== undefined
+            ? conditions.date
+            : `${dateFormat(conditions.date, "yyyy-mm-dd")}`;
         const header = [
           { header: "No", key: "no" },
           { header: "Aspek Callmon", key: "aspect_callmon" },
@@ -367,6 +385,7 @@ exports.generateReport = async (conditions, report = 0) => {
           { header: "Skor", key: "skor" },
         ];
         const { data } = await qa_detailsControler.getQADetails(conditions);
+
         const data_report = data;
 
         if (data_report.length > 0) {
@@ -394,19 +413,32 @@ exports.generateReport = async (conditions, report = 0) => {
           const mergeCells = "A1:E2";
           const mergeCells2 = "A3:E3";
 
-          const fileName = `${filename}-${dateFormat(conditions.date, 'yyyy-mm-dd-HH-MM-ss')}`;
+          const fileName = `${filename}-${dateFormat(
+            dates,
+            "yyyy-mm-dd-HH-MM-ss"
+          )}`;
           generate = await thread.create({
-           task: "export-report-qa",
-           header,
-           data_report,
-           fileName,
-           dates,
-           timeColumn,
-           tableLine,
-           title,
-           mergeCells,
-         });
-
+            task: "export-report-qa",
+            header,
+            data_report,
+            fileName,
+            dates,
+            timeColumn,
+            tableLine,
+            title,
+            mergeCells,
+            mergeCells2,
+            calldate,
+            durasi,
+            customer_name,
+            card_number,
+            QA_by,
+            agent,
+            qa_notes,
+            periods,
+            total,
+          });
+         // generate = await excel.excel_generator_qa(header, data_report, fileName, timeColumn, tableLine, title, mergeCells, mergeCells2,   calldate, durasi, customer_name, card_number, QA_by, agent, qa_notes, periods, total)
           return generate;
         } else {
           return false;
@@ -461,18 +493,21 @@ exports.generateReport = async (conditions, report = 0) => {
         ];
         const mergeCells = "A1:L2";
 
-        const fileName = `${filename}-${dateFormat(conditions.date, 'yyyy-mm-dd-HH-MM-ss')}`;
+        const fileName = `${filename}-${dateFormat(
+          conditions.date,
+          "yyyy-mm-dd-HH-MM-ss"
+        )}`;
         generate = await thread.create({
-         task: "export-report",
-         header,
-         data_report,
-         fileName,
-         dates,
-         timeColumn,
-         tableLine,
-         title,
-         mergeCells,
-       });
+          task: "export-report",
+          header,
+          data_report,
+          fileName,
+          dates,
+          timeColumn,
+          tableLine,
+          title,
+          mergeCells,
+        });
 
         return generate;
       }
@@ -508,8 +543,11 @@ exports.generateReport = async (conditions, report = 0) => {
         const tableLine = ["A", "B", "C", "D", "E", "F", "G", "H"];
         const mergeCells = "A1:H2";
 
-        const fileName = `${filename}-${dateFormat(conditions.date, 'yyyy-mm-dd-HH-MM-ss')}`;
-         generate = await thread.create({
+        const fileName = `${filename}-${dateFormat(
+          conditions.date,
+          "yyyy-mm-dd-HH-MM-ss"
+        )}`;
+        generate = await thread.create({
           task: "export-report",
           header,
           data_report,
@@ -557,18 +595,21 @@ exports.generateReport = async (conditions, report = 0) => {
         const tableLine = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J"];
         const mergeCells = "A1:J2";
 
-        const fileName = `${filename}-${dateFormat(conditions.date, 'yyyy-mm-dd-HH-MM-ss')}`;
+        const fileName = `${filename}-${dateFormat(
+          conditions.date,
+          "yyyy-mm-dd-HH-MM-ss"
+        )}`;
         generate = await thread.create({
-         task: "export-report",
-         header,
-         data_report,
-         fileName,
-         dates,
-         timeColumn,
-         tableLine,
-         title,
-         mergeCells,
-       });
+          task: "export-report",
+          header,
+          data_report,
+          fileName,
+          dates,
+          timeColumn,
+          tableLine,
+          title,
+          mergeCells,
+        });
 
         return generate;
       }
@@ -636,8 +677,11 @@ exports.generateReport = async (conditions, report = 0) => {
         ];
         const mergeCells = "A1:R2";
 
-        const fileName = `${filename}-${dateFormat(conditions.date, 'yyyy-mm-dd-HH-MM-ss')}`;
-         generate = await thread.create({
+        const fileName = `${filename}-${dateFormat(
+          conditions.date,
+          "yyyy-mm-dd-HH-MM-ss"
+        )}`;
+        generate = await thread.create({
           task: "export-report",
           header,
           data_report,
@@ -711,8 +755,11 @@ exports.generateReport = async (conditions, report = 0) => {
         ];
         const mergeCells = "A1:P2";
 
-        const fileName = `${filename}-${dateFormat(conditions.date, 'yyyy-mm-dd-HH-MM-ss')}`;
-         generate = await thread.create({
+        const fileName = `${filename}-${dateFormat(
+          conditions.date,
+          "yyyy-mm-dd-HH-MM-ss"
+        )}`;
+        generate = await thread.create({
           task: "export-report",
           header,
           data_report,
