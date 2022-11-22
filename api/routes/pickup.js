@@ -39,7 +39,7 @@ router.post('/', async (req, res) => {
         if (updated) {
             const call_id = req.body.call_id
 
-            const update_call = await callsController.updateData({ pickup_date: pickupAt }, { id: call_id })
+            const update_call = await callsController.updateData({ pickup_date: 'NOW()' }, { id: call_id })
             console.log(update_call)
         }
 

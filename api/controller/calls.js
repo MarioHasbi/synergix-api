@@ -103,7 +103,7 @@ exports.getRecording = async (conditions) => {
 }
 
 exports.getQAlist = async (conditions) => {
-    const customConditions = []
+    const customConditions = [`pickup_date IS NOT NULL`]
     const conditionTypes = { 'like': ['phone_number'] }
 
     if (conditions.customer_name !== undefined) {
@@ -137,12 +137,14 @@ exports.getQAlist = async (conditions) => {
         'DATE(call_date) AS filedate',
         'pbx_filename AS filename',
         'SEC_TO_TIME( SUM( TIMEDIFF( hangup_date, answer_date ) ) ) AS call_duration',
+        'outbound_categories.name AS outbound_categori',
+	'outbound_category_details.name AS outbound_category_detail',
+	'calls.note AS call_note'
     ]
 
     const columnSelect = [
         'id',
-        'phone_number',
-        
+        'phone_number',        
         'call_date',
         'created_at',
         'customer_id',
@@ -154,7 +156,10 @@ exports.getQAlist = async (conditions) => {
     const join = [
         `LEFT JOIN customers ON customers.id = ${table}.customer_id`,
         `LEFT JOIN campaigns ON campaigns.id = ${table}.campaign_id`,
-        `JOIN users ON users.id = ${table}.user_id`
+        `JOIN users ON users.id = ${table}.user_id`,
+        `LEFT JOIN outbound_categories ON calls.outbound_category_id = outbound_categories.id`,
+        `LEFT JOIN outbound_category_details ON calls.outbound_category_detail_id = outbound_category_details.id`
+
     ]
     const groupBy = ['calls.id']
 
@@ -365,6 +370,9 @@ exports.getReportCallCustomer = async (conditions) => {
         `us.fullname AS agent_fullname`,
         `campaigns.name AS campaign_name`,
         `customers.fullname AS customer_name`,
+        `customer_statuses.name AS customer_status,
+         checking_statuses.name AS checking_status,
+         checking_reasons.name AS checking_reason`,
         `CASE            
             WHEN calls.phone_number = customers.phone_1 THEN
             'Phone Number 1' 
@@ -417,15 +425,20 @@ exports.getReportCallCustomer = async (conditions) => {
         `LEFT JOIN outbound_category_details ON outbound_category_details.id = ${table}.outbound_category_detail_id`,
         `JOIN campaigns ON campaigns.id = ${table}.campaign_id`,
         `JOIN file_uploads ON file_uploads.campaign_id = campaigns.id`,
+        `LEFT JOIN customer_statuses ON customers.customer_status_id = customer_statuses.id
+        LEFT JOIN checking_reasons ON customers.checking_reason_id = checking_reasons.id
+        LEFT JOIN checking_statuses ON customers.checking_status_id = checking_statuses.id`
     ]
     if (conditions.limit !== undefined) {
         conditions.limit = conditions.limit
     } else {
         conditions.limit = 1000
     }
+
+    const groupBy = ['calls.id']
     
 
-    const data = await dbQueryHelper.getAll({ table, conditions, conditionTypes, customConditions, customColumns, join })
+    const data = await dbQueryHelper.getAll({ table, conditions, conditionTypes, customConditions, customColumns, join , groupBy})
 
     return data
 };

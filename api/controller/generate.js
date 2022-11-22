@@ -213,6 +213,9 @@ exports.generateReport = async (conditions, report = 0) => {
           { header: "Agent Fullname", key: "agent_fullname" },
           { header: "Campaign Name", key: "campaign_name" },
           { header: "Customer", key: "customer_name" },
+          { header: "Customer Status", key: "customer_status" },
+          { header: "Checking Status", key: "checking_status" },
+          { header: "Checking Reason", key: "checking_reason" },
           { header: "Phone Number Type", key: "phone_number_type" },
           { header: "Phone Number", key: "phone_number" },
           { header: "Call Duration", key: "call_duration" },
@@ -250,8 +253,11 @@ exports.generateReport = async (conditions, report = 0) => {
           "N",
           "O",
           "P",
+          "Q",
+          "R",
+          "S"
         ];
-        const mergeCells = "A1:P2";
+        const mergeCells = "A1:S2";
 
         //generate = await excel.excel_generator(header, data_report, `${filename}-${dateFormat(conditions.date, 'yyyy-mm-dd-HH-mm-ss')}`, dates, timeColumn, tableLine, title, mergeCells)
         const fileName = `${filename}-${dateFormat(
@@ -472,6 +478,33 @@ exports.generateReport = async (conditions, report = 0) => {
           { header: "Periode 8", key: "period_8" },
           { header: "Periode 9", key: "period_9" },
           { header: "Periode 10", key: "period_10" },
+          { header: "Periode 11", key: "period_11" },
+          { header: "Periode 12", key: "period_12" },
+          { header: "Periode 13", key: "period_13" },
+          { header: "Periode 14", key: "period_14" },
+          { header: "Periode 15", key: "period_15" },
+          { header: "Periode 16", key: "period_16" },
+          { header: "Periode 17", key: "period_17" },
+          { header: "Periode 18", key: "period_18" },
+          { header: "Periode 19", key: "period_19" },
+          { header: "Periode 20", key: "period_20" },
+          { header: "Periode 21", key: "period_21" },
+          { header: "Periode 22", key: "period_22" },
+          { header: "Periode 23", key: "period_23" },
+          { header: "Periode 24", key: "period_24" },
+          { header: "Periode 25", key: "period_25" },
+          { header: "Periode 26", key: "period_26" },
+          { header: "Periode 27", key: "period_27" },
+          { header: "Periode 28", key: "period_28" },
+          { header: "Periode 29", key: "period_29" },
+          { header: "Periode 30", key: "period_30" },
+          { header: "Periode 31", key: "period_31" },
+          { header: "Periode 32", key: "period_32" },
+          { header: "Periode 33", key: "period_33" },
+          { header: "Periode 34", key: "period_34" },
+          { header: "Periode 35", key: "period_35" },
+          { header: "Average All Periode", key: "AVG" }
+         
         ];
         const { data } = await qa_detailsControler.getQASummaries(conditions);
         const data_report = data;
@@ -490,8 +523,36 @@ exports.generateReport = async (conditions, report = 0) => {
           "J",
           "K",
           "L",
+          "M",
+          "N",
+          "O",
+          "P",
+          "Q",
+          "R",
+          "S",
+          "T",
+          "U",
+          "V",
+          "W",
+          "X",
+          "Y",
+          "Z",
+          "AA",
+          "AB",
+          "AC",
+          "AD",
+          "AE",
+          "AF",
+          "AG",
+          "AH",
+          "AI",
+          "AJ",
+          "AK",
+          "AL",
+        
+          
         ];
-        const mergeCells = "A1:L2";
+        const mergeCells = "A1:AL2";
 
         const fileName = `${filename}-${dateFormat(
           conditions.date,

@@ -18,22 +18,36 @@ router.get('/', async (req, res, next) => {
 	const userId = req.cookies.user_id
 	const userLevelId = req.cookies.user_level_id
 
+	
 	let result
 
-	if (userLevelId === config.user_level.agent) {
+	if (userLevelId == config.user_level.agent) {
 		conditions['user_id'] = userId
 		result = await Controller.getAllByUser(conditions)
 	} else {
 		result = await Controller.getAll(conditions)
 	}
 
+
+
 	return response.sendSuccessData(res, result)
 })
 
 router.get('/listcall', async (req, res, next) => {
 	const conditions = (req.query)
+	const userId = req.cookies.user_id
+	const userLevelId = req.cookies.user_level_id
+	
 	// const result = await Controller.listCampaignCall(conditions)
-	const result = await Controller.listCampaignCall(conditions)
+	let result 
+	
+	if (userLevelId == config.user_level.agent) {
+		conditions['user_id'] = userId
+		result = await Controller.listCampaignCallUser(conditions)
+	} else {
+		result=	await Controller.listCampaignCall(conditions)
+	}
+ 
 
 	if (result.data === false) {
 		return response.sendDataNotFound(res, result)

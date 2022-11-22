@@ -4,7 +4,6 @@ const callsController = require('../controller/calls')
 const response = require('../helpers/response')
 const router = express.Router()
 const validationMiddleware = require('../middleware/validation')
-const config = require('../config/index')
 
 router.get('/', async (req, res, next) => {
 	const conditions = req.query

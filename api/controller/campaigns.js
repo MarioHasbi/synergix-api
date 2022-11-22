@@ -10,12 +10,14 @@ const table = 'campaigns'
 
 exports.getAll = async (conditions) => {
     let conditionTypes = {}
+    let customColumns = []
     conditionTypes = {
         'like': ['name']
     }
+    customColumns.push(`IF(NOW()> campaigns.end_date , "0" ,  "1") AS is_active`)
     
 
-    const data = await dbQueryHelper.getAll({ table, conditionTypes, conditions})
+    const data = await dbQueryHelper.getAll({ table, customColumns, conditionTypes, conditions})
 
     return data
 };
@@ -33,14 +35,13 @@ exports.getAllByUser = async (conditions) => {
     conditionTypes = {
         'like': ['name']
     }
+    let customColumns = []
 
     const join = [
         `JOIN campaign_users ON ${table}.id = campaign_users.campaign_id`,
         
         
-    ]
-
-    
+    ]  
 
 
     const groupBy = [`campaigns.id`]
@@ -51,14 +52,21 @@ exports.getAllByUser = async (conditions) => {
         delete conditions.user_level_id
     }
 
-    const data = await dbQueryHelper.getAll({ table, conditionTypes, conditions, customConditions, groupBy })
+    customColumns.push( `IF(campaigns.is_active = 0 ,"0",IF ( NOW()> campaigns.end_date, "0", "1" )) AS is_active `)
+
+
+
+
+    const data = await dbQueryHelper.getAll({ table, conditionTypes, join , customColumns, conditions, customConditions, groupBy })
 
     return data
 };
 
 exports.getDetail = async (conditions) => {
 
-    const data = await dbQueryHelper.getDetail({ table, conditions })
+    const customColumns = [`IF(campaigns.is_active = 0 ,"0",IF ( NOW()> campaigns.end_date, "0", "1" )) AS is_active `]
+
+    const data = await dbQueryHelper.getDetail({ table, conditions , customColumns})
 
     return data
 }
@@ -312,15 +320,47 @@ exports.listCampaignCall = async (conditions) => {
         `( SELECT COUNT( campaign_users.id ) FROM campaign_users WHERE campaign_users.campaign_id = campaigns.id) AS total_agent`,
         `(SELECT COUNT( customers.id ) From customers WHERE customers.campaign_id = campaigns.id AND customers.is_active = 1 ) AS total_customer`,
         `( SELECT COUNT( calls.id ) FROM calls WHERE calls.campaign_id = campaigns.id and calls.outbound_status_id >= 1 ) AS total_call`,
-        `campaigns.is_active AS is_active_campaign`
+        `IF(campaigns.is_active = 0 ,"0",IF ( NOW()> campaigns.end_date, "0", "1" )) AS is_active_campaign `
     ]
     const groupBy = [`id`]
+
 
     const data = await dbQueryHelper.getAll({ table, conditions, customConditions, conditionTypes, columnSelect, customColumns, groupBy })
 
     return data
 }
 
+
+exports.listCampaignCallUser = async (conditions) => {
+  
+    const columnSelect = ['id', 'name', 'start_date', 'end_date']
+    const customConditions = []
+    const conditionTypes = { 'like': ['name'] }
+
+    if (conditions.start_date_list !== undefined) {
+        customConditions.push(`DATE(start_date) >= '${conditions.start_date_list}'`)
+    }
+    if (conditions.end_date_list !== undefined) {
+        customConditions.push(`DATE(end_date) <= '${conditions.end_date_list}'`)
+    }
+    customConditions.push(`media_id = 1`)
+    customConditions.push(`campaign_users.user_id = ${conditions.user_id}`)
+    const customColumns = [
+        `( SELECT COUNT( campaign_users.id ) FROM campaign_users WHERE campaign_users.campaign_id = campaigns.id) AS total_agent`,
+        `(SELECT COUNT( customers.id ) From customers WHERE customers.campaign_id = campaigns.id AND customers.is_active = 1 ) AS total_customer`,
+        `( SELECT COUNT( calls.id ) FROM calls WHERE calls.campaign_id = campaigns.id and calls.outbound_status_id >= 1 ) AS total_call`,
+        `IF(campaigns.is_active = 0 ,"0",IF ( NOW()> campaigns.end_date, "0", "1" )) AS is_active_campaign `
+    ]
+
+    const join = [
+        `JOIN campaign_users ON ${table}.id = campaign_users.campaign_id`,
+    ]  
+    const groupBy = [`campaigns.id`]
+
+    const data = await dbQueryHelper.getAll({ table, conditions, customConditions,  join, conditionTypes, columnSelect, customColumns, groupBy })
+
+    return data
+}
 
 exports.listEmailCampaign = async (conditions) => {
 

@@ -43,7 +43,6 @@ router.get('/report-call-customer', async (req, res) => {
     if (generate === null) {
         return response.sendBadRequest(res, 'Invalid Data')
     }
-   
     const result = {
         total_data: 1 ,
         data: {
@@ -101,6 +100,7 @@ router.get('/export-qa-details', async (req, res) => {
     }
     return response.sendSuccessData(res, result)
 })
+
 
 router.get('/report-qa-summaries', async (req, res) => {
     const conditions = req.query

@@ -12,6 +12,7 @@ const apiDoc = require('./ApiDoc.json')
 const rfs = require('rotating-file-stream')
 const router = require('./api/routes')
 const logger = require('./api/helpers/logger')
+
 // test coment
 // parsing application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: true }))
@@ -23,12 +24,19 @@ app.use(express.static(config.publicDir))
 // create a write stream (in append mode)
 // const accessLogStream = fs.createWriteStream(path.join(__dirname, 'request.log'), { flags: 'a' })
 // create a rotating write stream
+// const accessLogStream = rfs.createStream('request.log', {
+//     interval: '1d', // rotate daily
+//     path: config.logDir
+// })
+// // setup the logger
+// app.use(morgan('combined', { stream: accessLogStream }))
+
 logger.setRequest(app); 
-// setup the logger
+
 
 
 const corsOptions = {
-    origin: ['http://192.168.3.98:8080','http://192.168.3.170:8080'],
+    origin: ['http://172.18.129.196:8080','http://172.18.129.197:8080','https://telesales.dev.bri.co.id','https://telesales-api.dev.bri.co.id'],
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
     credentials: true,
     optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204

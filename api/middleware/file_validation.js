@@ -1,5 +1,6 @@
 const _ = require('lodash')
 const config = require('../config/index')
+const dateFormat = require('dateformat')
 const fileHelper = require('../helpers/files')
 const fileTypeLibrary = require('file-type')
 const fs = require('fs')
@@ -105,17 +106,20 @@ exports.singleFile = ({fieldName = '', fileSizeLimit = 1, fileType = 'public', f
  * @param  {string} [fileType='public'] - determined filename format and destination. @example 'public', 'ticket', 'info', 'emailOutbox', 'userPhoto'
  * @param  {string} fileFilter - determined file type image or not. fill with value 'image' for uploading image file.
  */
-exports.multiFile = ({fieldName = '', fileSizeLimit = 1, fileMaxTotal = 1, fileType = 'public', fileFilter = ''}) => {
+ exports.multiFile = ({fieldName = '', fileSizeLimit = 1, fileMaxTotal = 1, fileType = 'public', fileFilter = ''}) => {
     return (req, res, next) => {
+        const now = new Date()
+        const ymd = dateFormat(now, 'yyyy/mm/dd')
         const folderId = req.params.id
         const types = {
             public: uploadConfig.public,
             ticket: uploadConfig.ticketAttachment(folderId),
             info: uploadConfig.infoAttachment,
-            emailOutbox: uploadConfig.emailOutboxAttachment(folderId),
+            emailOutbox: uploadConfig.emailOutboxAttachment(`${ymd}/${folderId}`),
             userPhoto: uploadConfig.userPhoto
         }
         const storage = types[fileType] || uploadConfig.public
+       
         const limits = {
             fileSize: 1000000*fileSizeLimit // from MB to bytes
         }

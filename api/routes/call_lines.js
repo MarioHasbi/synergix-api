@@ -1,6 +1,6 @@
 const express = require('express')
-const Schema = require('../schema/callbacks')
-const Controller = require('../controller/callbacks')
+const Schema = require('../schema/call_lines')
+const Controller = require('../controller/call_lines')
 const response = require('../helpers/response')
 const router = express.Router()
 const validationMiddleware = require('../middleware/validation')
@@ -12,9 +12,8 @@ router.get('/', async (req, res, next) => {
 	return response.sendSuccessData(res, result)
 })
 
-
-router.post('/', validationMiddleware(Schema.create, 'body'), async (req, res, next) => {
-	console.log('callback_data', req.body)
+router.post('/', async (req, res, next) => {
+	console.log('insert call_lines data : ', req.body)
 	const result = await Controller.insertData(req.body)
 console.log(result)
 	if (result.data === false) {
@@ -37,7 +36,7 @@ router.get('/:id', validationMiddleware(Schema.detail, 'params'), async (req, re
 
 router.put('/:id', validationMiddleware(Schema.update, 'body'), async (req, res, next) => {
 	const conditions = {id: req.params.id}
-	console.log(req.body)
+	console.log('edit call_lines data : ', req.body)
 	const result = await Controller.updateData(req.body, conditions)
 
 	console.log(result)

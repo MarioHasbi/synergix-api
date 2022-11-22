@@ -81,7 +81,94 @@ exports.getQASummaries = async (conditions) => {
         `SUM( CASE WHEN quality_assurance_users.period_id = 9 THEN quality_assurance_details.result ELSE 0 END ) 
         AS period_9`,
         `SUM( CASE WHEN quality_assurance_users.period_id = 10 THEN quality_assurance_details.result ELSE 0 END ) 
-        AS period_10 `
+        AS period_10 `,
+        `SUM( CASE WHEN quality_assurance_users.period_id = 11 THEN quality_assurance_details.result ELSE 0 END ) 
+        AS period_11`,
+        `SUM( CASE WHEN quality_assurance_users.period_id = 12 THEN quality_assurance_details.result ELSE 0 END ) 
+        AS period_12`,
+        `SUM( CASE WHEN quality_assurance_users.period_id = 13 THEN quality_assurance_details.result ELSE 0 END ) 
+        AS period_13`,
+        `SUM( CASE WHEN quality_assurance_users.period_id = 14 THEN quality_assurance_details.result ELSE 0 END ) 
+        AS period_14`,
+        `SUM( CASE WHEN quality_assurance_users.period_id = 15 THEN quality_assurance_details.result ELSE 0 END ) 
+        AS period_15`,
+        `SUM( CASE WHEN quality_assurance_users.period_id = 16 THEN quality_assurance_details.result ELSE 0 END ) 
+        AS period_16`,
+        `SUM( CASE WHEN quality_assurance_users.period_id = 17 THEN quality_assurance_details.result ELSE 0 END ) 
+        AS period_17`,
+        `SUM( CASE WHEN quality_assurance_users.period_id = 18 THEN quality_assurance_details.result ELSE 0 END ) 
+        AS period_18`,
+        `SUM( CASE WHEN quality_assurance_users.period_id = 19 THEN quality_assurance_details.result ELSE 0 END ) 
+        AS period_19`,
+        `SUM( CASE WHEN quality_assurance_users.period_id = 20 THEN quality_assurance_details.result ELSE 0 END ) 
+        AS period_20 `,
+        `SUM( CASE WHEN quality_assurance_users.period_id = 21 THEN quality_assurance_details.result ELSE 0 END ) 
+        AS period_21`,
+        `SUM( CASE WHEN quality_assurance_users.period_id = 22 THEN quality_assurance_details.result ELSE 0 END ) 
+        AS period_22`,
+        `SUM( CASE WHEN quality_assurance_users.period_id = 23 THEN quality_assurance_details.result ELSE 0 END ) 
+        AS period_23`,
+        `SUM( CASE WHEN quality_assurance_users.period_id = 24 THEN quality_assurance_details.result ELSE 0 END ) 
+        AS period_24`,
+        `SUM( CASE WHEN quality_assurance_users.period_id = 25 THEN quality_assurance_details.result ELSE 0 END ) 
+        AS period_25`,
+        `SUM( CASE WHEN quality_assurance_users.period_id = 26 THEN quality_assurance_details.result ELSE 0 END ) 
+        AS period_26`,
+        `SUM( CASE WHEN quality_assurance_users.period_id = 27 THEN quality_assurance_details.result ELSE 0 END ) 
+        AS period_27`,
+        `SUM( CASE WHEN quality_assurance_users.period_id = 28 THEN quality_assurance_details.result ELSE 0 END ) 
+        AS period_28`,
+        `SUM( CASE WHEN quality_assurance_users.period_id = 29 THEN quality_assurance_details.result ELSE 0 END ) 
+        AS period_29`,
+        `SUM( CASE WHEN quality_assurance_users.period_id = 30 THEN quality_assurance_details.result ELSE 0 END ) 
+        AS period_30 `,
+        `SUM( CASE WHEN quality_assurance_users.period_id = 31 THEN quality_assurance_details.result ELSE 0 END ) 
+        AS period_31`,
+        `SUM( CASE WHEN quality_assurance_users.period_id = 32 THEN quality_assurance_details.result ELSE 0 END ) 
+        AS period_32`,
+        `SUM( CASE WHEN quality_assurance_users.period_id = 33 THEN quality_assurance_details.result ELSE 0 END ) 
+        AS period_33`,
+        `SUM( CASE WHEN quality_assurance_users.period_id = 34 THEN quality_assurance_details.result ELSE 0 END ) 
+        AS period_34`,
+        `SUM( CASE WHEN quality_assurance_users.period_id = 35 THEN quality_assurance_details.result ELSE 0 END ) 
+        AS period_35`,
+        `ROUND((SUM(CASE WHEN quality_assurance_users.period_id = 1 THEN quality_assurance_details.result ELSE 0 END ) + 
+        SUM(CASE WHEN quality_assurance_users.period_id = 2 THEN quality_assurance_details.result ELSE 0 END ) + 
+        SUM(CASE WHEN quality_assurance_users.period_id = 3 THEN quality_assurance_details.result ELSE 0 END ) + 
+        SUM(CASE WHEN quality_assurance_users.period_id = 4 THEN quality_assurance_details.result ELSE 0 END ) + 
+        SUM(CASE WHEN quality_assurance_users.period_id = 5 THEN quality_assurance_details.result ELSE 0 END ) + 
+        SUM(CASE WHEN quality_assurance_users.period_id = 6 THEN quality_assurance_details.result ELSE 0 END ) + 
+        SUM(CASE WHEN quality_assurance_users.period_id = 7 THEN quality_assurance_details.result ELSE 0 END ) + 
+        SUM(CASE WHEN quality_assurance_users.period_id = 8 THEN quality_assurance_details.result ELSE 0 END ) + 
+        SUM(CASE WHEN quality_assurance_users.period_id = 9 THEN quality_assurance_details.result ELSE 0 END ) + 
+        SUM(CASE WHEN quality_assurance_users.period_id = 10 THEN quality_assurance_details.result ELSE 0 END ) + 
+        SUM(CASE WHEN quality_assurance_users.period_id = 11 THEN quality_assurance_details.result ELSE 0 END ) + 
+        SUM(CASE WHEN quality_assurance_users.period_id = 12 THEN quality_assurance_details.result ELSE 0 END ) + 
+        SUM(CASE WHEN quality_assurance_users.period_id = 13 THEN quality_assurance_details.result ELSE 0 END ) + 
+        SUM(CASE WHEN quality_assurance_users.period_id = 14 THEN quality_assurance_details.result ELSE 0 END ) + 
+        SUM(CASE WHEN quality_assurance_users.period_id = 15 THEN quality_assurance_details.result ELSE 0 END ) + 
+        SUM(CASE WHEN quality_assurance_users.period_id = 16 THEN quality_assurance_details.result ELSE 0 END ) + 
+        SUM(CASE WHEN quality_assurance_users.period_id = 17 THEN quality_assurance_details.result ELSE 0 END ) + 
+        SUM(CASE WHEN quality_assurance_users.period_id = 18 THEN quality_assurance_details.result ELSE 0 END ) + 
+        SUM(CASE WHEN quality_assurance_users.period_id = 19 THEN quality_assurance_details.result ELSE 0 END ) + 
+        SUM(CASE WHEN quality_assurance_users.period_id = 20 THEN quality_assurance_details.result ELSE 0 END ) + 
+        SUM(CASE WHEN quality_assurance_users.period_id = 21 THEN quality_assurance_details.result ELSE 0 END ) + 
+        SUM(CASE WHEN quality_assurance_users.period_id = 22 THEN quality_assurance_details.result ELSE 0 END ) + 
+        SUM(CASE WHEN quality_assurance_users.period_id = 23 THEN quality_assurance_details.result ELSE 0 END ) + 
+        SUM(CASE WHEN quality_assurance_users.period_id = 24 THEN quality_assurance_details.result ELSE 0 END ) + 
+        SUM(CASE WHEN quality_assurance_users.period_id = 25 THEN quality_assurance_details.result ELSE 0 END ) + 
+        SUM(CASE WHEN quality_assurance_users.period_id = 26 THEN quality_assurance_details.result ELSE 0 END ) + 
+        SUM(CASE WHEN quality_assurance_users.period_id = 27 THEN quality_assurance_details.result ELSE 0 END ) + 
+        SUM(CASE WHEN quality_assurance_users.period_id = 28 THEN quality_assurance_details.result ELSE 0 END ) + 
+        SUM(CASE WHEN quality_assurance_users.period_id = 29 THEN quality_assurance_details.result ELSE 0 END ) + 
+        SUM(CASE WHEN quality_assurance_users.period_id = 30 THEN quality_assurance_details.result ELSE 0 END ) + 
+        SUM(CASE WHEN quality_assurance_users.period_id = 31 THEN quality_assurance_details.result ELSE 0 END ) + 
+        SUM(CASE WHEN quality_assurance_users.period_id = 32 THEN quality_assurance_details.result ELSE 0 END ) + 
+        SUM(CASE WHEN quality_assurance_users.period_id = 33 THEN quality_assurance_details.result ELSE 0 END ) + 
+        SUM(CASE WHEN quality_assurance_users.period_id = 34 THEN quality_assurance_details.result ELSE 0 END ) + 
+        SUM(CASE WHEN quality_assurance_users.period_id = 35 THEN quality_assurance_details.result ELSE 0 END ) 
+        
+        )/35,2) AS AVG`
     ]
 
     if (conditions.date !== undefined) {
@@ -95,7 +182,7 @@ exports.getQASummaries = async (conditions) => {
     }
 
     const join = [
-        `JOIN quality_assurance_users ON ${table}.quality_assurance_user_id = quality_assurance_users.id`,
+        `JOIN quality_assurance_users ON ${table}.quality_assurance_user_id = quality_assurance_users.user_id`,
         `JOIN calls ON quality_assurance_users.call_id = calls.id`,
         `JOIN users ON calls.user_id = users.id `,
         `JOIN periods ON periods.id = quality_assurance_users.period_id`,

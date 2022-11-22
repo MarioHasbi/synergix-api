@@ -15,9 +15,8 @@ exports.sendSuccessData = function (res, data) {
 		response_code: 200,
 		success: true,
 		total_data: data.total_data || 0,
-		limit : config.data_limit,
-		data: data.data || {}
-		
+		limit : config.data_limit||0,
+		data: data.data || {},
 	}
 	
 	if (data.limit > 0 && data.total_data > 0) {
