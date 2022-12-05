@@ -12,6 +12,24 @@ const apiDoc = require('./ApiDoc.json')
 const rfs = require('rotating-file-stream')
 const router = require('./api/routes')
 const logger = require('./api/helpers/logger')
+const helmet =require('helmet');
+
+app.use(helmet());
+
+app.use(
+    helmet.hsts({
+      maxAge: 24 * 60 * 60 * 1000,
+      includeSubDomains: false,
+    })
+   );
+   
+app.use(
+    helmet.frameguard({
+      action: "deny",
+    })
+   );
+
+
 
 // test coment
 // parsing application/x-www-form-urlencoded

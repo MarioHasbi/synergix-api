@@ -12,7 +12,7 @@ router.get('/', async (req, res, next) => {
     }
     const result = {
         data: {
-            url: "http://" + req.headers.host + voice_data.url,
+            url: "https://" + req.headers.host + voice_data.url,
             filename: voice_data.filename
         }
     }

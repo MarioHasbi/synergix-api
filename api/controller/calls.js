@@ -13,7 +13,7 @@ exports.getAll = async (conditions) => {
         `outbound_statuses.name AS outbound_status`,
         `outbound_categories.name AS outbound_categories`,
         `outbound_category_details.name AS outbound_category_details`,
-        `SEC_TO_TIME( SUM( TIMEDIFF( hangup_date, answer_date ) ) ) AS call_duration`,
+        `TIMEDIFF( hangup_date, answer_date )  AS call_duration`,
         `DATE(${table}.call_date) AS filedate`,
         `calls.pbx_filename AS filename`,
 
@@ -446,21 +446,27 @@ exports.getReportCallCustomer = async (conditions) => {
 
 exports.getBussinesssAchivement = async (conditions) => {
     const customConditions = []
+    
     const columnSelect = ['id', 'user_id', 'campaign_id']
     const customColumns = [
-        `( SELECT username FROM users WHERE user_id = users.id ) AS username`,
-        `( SELECT campaigns.NAME FROM campaigns WHERE calls.campaign_id = campaigns.id ) AS campaign_name`,
+        `( SELECT username FROM users WHERE user_id = users.id ) AS username`,       
         `COUNT( customers.amount ) AS number_customer_approved`,
         `SUM( customers.amount ) AS nominal`,
         `ROUND( AVG( customers.amount ), 0 ) AS average_customer_nominal_approved`,
     ]
+
+    if(conditions.campaign_id){
+        customColumns.push(`( SELECT campaigns.NAME FROM campaigns WHERE calls.campaign_id = campaigns.id ) AS campaign_name`)
+    }else{
+        customColumns.push(`( "ALL CAMPAIGNS" ) AS campaign_name`)
+    }
 
     if (conditions.limit !== undefined) {
         conditions.limit = conditions.limit
     } else {
         conditions.limit = 1000
     }
-
+ 
 
     customConditions.push(`calls.outbound_category_id = 1 AND customers.amount IS NOT NULL `)
 
@@ -574,10 +580,10 @@ exports.getReportChecker = async (conditions) => {
         `JOIN customers ON customers.id = ${table}.customer_id`,
         `LEFT JOIN users ser ON ser.id = customers.checker_user_id`,
         `JOIN outbound_statuses ON outbound_statuses.id = ${table}.outbound_status_id`,
-        `LEFT JOIN outbound_categories ON outbound_categories.id = ${table}.outbound_category_id`,
+        `JOIN outbound_categories ON outbound_categories.id = ${table}.outbound_category_id`,
         `LEFT JOIN outbound_category_details ON outbound_category_details.id = ${table}.outbound_category_detail_id`,
         `JOIN campaigns ON campaigns.id = ${table}.campaign_id`,
-        `LEFT JOIN checking_reasons ON customers.checking_reason_id = checking_reasons.id`,
+        `JOIN checking_reasons ON customers.checking_reason_id = checking_reasons.id`,
     ]
     if (conditions.limit !== undefined) {
         conditions.limit = conditions.limit
@@ -585,7 +591,9 @@ exports.getReportChecker = async (conditions) => {
         conditions.limit = 1000
     }
 
-    const data = await dbQueryHelper.getAll({ table, conditions, customConditions, customColumns, join })
+    const groupBy = ['customer_id']
+
+    const data = await dbQueryHelper.getAll({ table, conditions, customConditions, customColumns, join, groupBy })
 
     return data
 };
@@ -657,7 +665,9 @@ exports.getReportCallDetail = async (conditions) => {
         conditions.limit = 1000
     }
 
-    const data = await dbQueryHelper.getAll({ table, conditions, conditionTypes, customConditions, customColumns, join })
+    const groupBy = ['calls.id']
+
+    const data = await dbQueryHelper.getAll({ table, conditions, conditionTypes, customConditions, customColumns, join, groupBy })
 
     return data
 };
