@@ -4,7 +4,7 @@ const config = require("../config/index")
 const Excel = require('exceljs');
 const { Console } = require("console");
 
-exports.excel_generator = async (header = [], data = [], fileName, dates, timeColumn = [], tableLine = [], title, mergeCells) => {
+exports.excel_generator = async (header = [], data = [], fileName, dates, timeColumn = [], tableLine = [], title, mergeCells, numberColumn=[]) => {
     return new Promise((resolve, reject) => {
         try {
             let workbook = new Excel.Workbook()
@@ -28,6 +28,12 @@ exports.excel_generator = async (header = [], data = [], fileName, dates, timeCo
                 const figureColumns = timeColumn
                 figureColumns.forEach((i) => {
                     ws.getColumn(i).numFmt = 'hh:mm:ss';
+                })
+
+                const numberColumns = numberColumn
+                numberColumns.forEach((i) => {
+                    const numFmtStr = '_("Rp "* #,##0.00_);_("$"* (#,##0.00);_("$"* "-"??_);_(@_)';
+                    ws.getColumn(i).numFmt = numFmtStr;
                 })
 
 

@@ -14,6 +14,7 @@ const cookieConfig = require('../config/cookie')
  * @param  {Object} next - Express next method
  */
 exports.authenticateJWT = (req, res, next) => {
+    res.header("X-Frame-Options", "DENY");
     const authHeader = req.headers.authorization
 
     if (authHeader) {
@@ -84,6 +85,7 @@ exports.authenticateJWT = (req, res, next) => {
  * @param  {Object} next - Express next method
  */
 exports.authenticateJWTRefresh = (req, res, next) => {
+    res.header("X-Frame-Options", "DENY");
     const authHeader = req.headers.authorization
 
     if (authHeader) {

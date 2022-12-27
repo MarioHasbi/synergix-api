@@ -45,7 +45,8 @@ const unlessPathRefresh = (path = [], middleware) => {
     }
 }
 
-router.get('/', (req, res) => {
+router.get('/', (req, res) => {   
+    res.setHeader("Strict-Transport-Security", "max-age=86400000");
     res.send({app: 'Synergix API'})
 })
 

@@ -131,7 +131,7 @@ exports.generateReport = async (conditions, report = 0) => {
         ];
 
         const data_report = data;
-
+        const numberColumn = ['P']
         const timeColumn = [];
         const tableLine = [
           "A",
@@ -188,6 +188,7 @@ exports.generateReport = async (conditions, report = 0) => {
           tableLine,
           title,
           mergeCells,
+          numberColumn
         });
         return generate;
       }
@@ -306,7 +307,7 @@ exports.generateReport = async (conditions, report = 0) => {
           conditions
         );
         const data_report = data;
-
+        const numberColumn = ["E","F"]
         const timeColumn = [];
         const tableLine = ["A", "B", "C", "D", "E", "F"];
         const mergeCells = "A1:F2";
@@ -325,6 +326,7 @@ exports.generateReport = async (conditions, report = 0) => {
           tableLine,
           title,
           mergeCells,
+          numberColumn
         });
 
         return generate;

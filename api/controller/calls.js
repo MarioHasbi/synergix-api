@@ -310,7 +310,7 @@ exports.getReportPerformanceAgent = async (conditions) => {
         customers.card_since_month AS card_since_month,
         customers.card_exp_date AS card_exp_date,
         customers.card_emboss_name AS card_emboss_name,
-        customers.amount AS amount,
+        ( customers.amount * 1) AS amount ,        
         customers.account_no AS account_no,
         customers.bank_interest AS bank_interest,
         customers.mother_name AS mother_name,

@@ -7,7 +7,8 @@ exports.getAll = async (conditions) => {
     const customColumns = [
         'customers.fullname AS customer_name',
         'email_statuses.name AS email_status',
-        `file_uploads.original_filename AS filename`
+        `file_uploads.original_filename AS filename`,
+        `customers.is_active AS customer_active`
     ]
     const join = [
         `JOIN customers ON customers.id = ${table}.customer_id`,
@@ -38,6 +39,9 @@ if(conditions.filename !== undefined)
 
     if (conditions.customer_name !== undefined) {
         customConditions.push(`customers.fullname LIKE '%${conditions.customer_name}%'`)
+    }
+    if (conditions.customer_active !== undefined) {
+        customConditions.push(`customers.is_active = ${conditions.customer_active}`)
     }
     const data = await dbQueryHelper.getAll({ table, conditions, customConditions, customColumns, join })
     return data

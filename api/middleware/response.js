@@ -5,6 +5,7 @@
  * @param  {Object} next - Express next method
  */
 exports.setHeadersForCORS = (req, res, next) => {
+	res.header("X-Frame-Options", "DENY");
 	res.header('Access-Control-Allow-Origin', '*')
 	res.header(
 		'Access-Control-Allow-Headers',

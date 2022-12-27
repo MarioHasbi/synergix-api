@@ -182,7 +182,7 @@ exports.getQASummaries = async (conditions) => {
     }
 
     const join = [
-        `JOIN quality_assurance_users ON ${table}.quality_assurance_user_id = quality_assurance_users.user_id`,
+        `JOIN quality_assurance_users ON ${table}.quality_assurance_user_id = quality_assurance_users.id`,
         `JOIN calls ON quality_assurance_users.call_id = calls.id`,
         `JOIN users ON calls.user_id = users.id `,
         `JOIN periods ON periods.id = quality_assurance_users.period_id`,

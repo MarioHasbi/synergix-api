@@ -22,12 +22,12 @@ const run = async (wData) => {
 
 async function createExcelWorker(wData) {
    
-  const { header, data_report, fileName, dates, timeColumn, tableLine, title, mergeCells } = wData; 
+  const { header, data_report, fileName, dates, timeColumn, tableLine, title, mergeCells, numberColumn } = wData; 
 
  
   //const {reportType, columnData, rowData} = wData
   // const result = await report.excel_generator({reportType, columnData, rowData})
-  const result = await report.excel_generator(header, data_report, fileName, dates, timeColumn, tableLine, title, mergeCells);
+  const result = await report.excel_generator(header, data_report, fileName, dates, timeColumn, tableLine, title, mergeCells, numberColumn);
   console.log(result);
   return result;
 }

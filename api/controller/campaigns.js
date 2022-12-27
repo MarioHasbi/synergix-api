@@ -160,9 +160,9 @@ exports.importCallCampaign = async (user_id, campaign_id, file_upload_id, data) 
                         created_by: user_id
                     }
 
-                    for (key in data) {
-                        values[key] = rows[i][data[key]]
-                    }
+                    for (key in data) {                       
+                        values[key] = rows[i][data[key]] 
+                    }      
 
                     const insertResult = await customersController.insertData(values)
                     if (insertResult.data !== false) {

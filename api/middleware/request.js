@@ -7,6 +7,7 @@ const response = require('../helpers/response')
  * @param  {Object} next - Express next method
  */
 exports.jsonContent = (req, res, next) => {
+	res.header("X-Frame-Options", "DENY");
 	if (req.headers['content-type'] !== 'application/json') {
 		return response.sendBadRequest(res, 'Json data is required')
 	} 

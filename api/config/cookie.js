@@ -11,6 +11,6 @@ exports.cookie_option = {
 exports.user_cookie_option = {
     httpOnly: false,
     domain: config.cookieDomain,
-    maxAge: 24* 60 * 60 * 1000,
+    maxAge: 24 * 60 * 60 * 1000,
     //secure:  process.env.NODE_ENV === 'production' || process.env.NODE_ENV === 'staging'  
 }
