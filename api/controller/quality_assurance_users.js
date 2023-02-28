@@ -71,7 +71,7 @@ exports.getDetail = async (conditions) => {
     "users.username AS agent",
     "calls.phone_number AS phone_number",
     "calls.call_date AS call_date",
-    "TIMEDIFF(calls.hangup_date,calls.answer_date) AS call_duration",
+    "IFNULL(SEC_TO_TIME( SUM( TIMEDIFF( hangup_date, answer_date ) ) ),SEC_TO_TIME( SUM( TIMEDIFF( dropcall_date, answer_date ) ) )) AS call_duration",
     "customers.fullname AS customer_name",
     "observers.username AS observer_name",
     "periods.name AS period_name",
