@@ -6,6 +6,9 @@ public/
 file_reports/
 file_voices/
 package-lock.json
+.env
+.env-production
+.env-staging
 
 
 
