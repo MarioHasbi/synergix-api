@@ -136,7 +136,7 @@ exports.getQAlist = async (conditions) => {
         'users.username AS agent',
         'DATE(call_date) AS filedate',
         'pbx_filename AS filename',
-        'SEC_TO_TIME( SUM( TIMEDIFF( hangup_date, answer_date ) ) ) AS call_duration',
+        'IFNULL(SEC_TO_TIME( SUM( TIMEDIFF( hangup_date, answer_date ) ) ),SEC_TO_TIME( SUM( TIMEDIFF( dropcall_date, answer_date ) ) )) AS call_duration',
         'outbound_categories.name AS outbound_categori',
 	'outbound_category_details.name AS outbound_category_detail',
 	'calls.note AS call_note'
